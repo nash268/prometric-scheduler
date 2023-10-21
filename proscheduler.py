@@ -57,7 +57,9 @@ with open('month_year.txt', 'r') as file:
     user_input = file.read().strip()
 
 # Select the option with the value user_input i.e "12 2023"
-Select(dropdown_month).select_by_value(user_input)
+# select month and year.......................................
+Select(dropdown_month).select_by_value("3 2024")
+#.............................................................
 
 # Find the submit button and click it
 submit_button = driver.find_element(By.ID, "masterPage_cphPageBody_btnGoCal")
