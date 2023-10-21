@@ -7,15 +7,15 @@
 This project automates website interaction using Selenium WebDriver in Python and check for availability.
 
 ## Download and Install python and required packages
-- https://www.python.org/downloads/
-- open cmd or terminal and type
+- download and install python https://www.python.org/downloads/
+- download and setup pip https://pip.pypa.io/en/stable/installation/
+- open cmd or terminal and type:
 - pip install selenium webdriver-manager
 
 
 ## Python Script (`proscheduler.py`)
-
-This script automates the website interaction and prints any available dates for a given test center.
-
+- inside cmd/terminal type:
+- python3 proscheduler.py
 
 ### Important Notes
 
