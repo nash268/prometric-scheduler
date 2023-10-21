@@ -1,7 +1,7 @@
 @echo off
 
 REM Specify Python installation directory
-set PYTHON_INSTALL_DIR="C:\Path\To\Your\Python"
+set PYTHON_INSTALL_DIR="C:\"
 
 REM Install Python
 msiexec /i https://www.python.org/ftp/python/3.x.x/python-3.x.x-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir=%PYTHON_INSTALL_DIR%

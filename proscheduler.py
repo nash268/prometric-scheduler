@@ -12,8 +12,7 @@ driver.get("https://securereg3.prometric.com/Welcome.aspx")
 
 # select step 1 in drop down menu
 programs_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlPrograms")
-select = Select(programs_menu)
-select.select_by_value("STEP1")
+Select(programs_menu).select_by_value("STEP1")
 
 #select country
 country_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlCountry")
@@ -52,15 +51,13 @@ dropdown_month = WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.ID, "masterPage_cphPageBody_monthYearlist"))
 )
 
-# Create a Select object
-select = Select(dropdown_month)
 
 # Read user input from a text file
 with open('month_year.txt', 'r') as file:
     user_input = file.read().strip()
 
 # Select the option with the value user_input i.e "12 2023"
-select.select_by_value(user_input)
+Select(dropdown_month).select_by_value(user_input)
 
 # Find the submit button and click it
 submit_button = driver.find_element(By.ID, "masterPage_cphPageBody_btnGoCal")
