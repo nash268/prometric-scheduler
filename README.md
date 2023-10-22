@@ -1,4 +1,4 @@
-![image](https://github.com/nash268/prometric-scheduler/assets/130772656/add914ea-e127-4102-ba96-76fa641a2e9c)# prometric-scheduler
+# prometric-scheduler
 
 # Automated Website Interaction with Selenium
 
