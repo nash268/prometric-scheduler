@@ -30,7 +30,7 @@ This project automates website interaction using Selenium WebDriver in Python an
 - similarly change exam name inside qoutes
  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/2edb384e-9009-42ee-b738-8789888248d3)
 
-- save changes and [run script](https://github.com/nash268/prometric-scheduler#python-script-proschedulerpy)
+- save changes and [run script](#python-script-proschedulerpy)
 
 
 
