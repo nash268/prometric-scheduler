@@ -15,8 +15,9 @@ This project automates website interaction using Selenium WebDriver in Python an
   ```
 
 ## Python Script (`proscheduler.py`)
-- download script file from top
-- open terminal in the same folder you have saved ``proscheduler.py``
+- [download repository](https://github.com/nash268/prometric-scheduler/archive/refs/heads/main.zip)
+- extract zip file
+- open terminal in the ``prometric-scheduler/`` folder where ``proscheduler.py`` is located
 - inside cmd/terminal run:
   ```
   python3 proscheduler.py
