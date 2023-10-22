@@ -1,4 +1,4 @@
-# prometric-scheduler
+![image](https://github.com/nash268/prometric-scheduler/assets/130772656/add914ea-e127-4102-ba96-76fa641a2e9c)# prometric-scheduler
 
 # Automated Website Interaction with Selenium
 
@@ -26,6 +26,10 @@ This project automates website interaction using Selenium WebDriver in Python an
 - specify month and year in python script as "12 2023"
 - find Select(dropdown_month).select_by_value("3 2024") and only change the date inside quotes
  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/1b186820-24fa-477e-8452-fc27bcfc35ee)
+
+- similarly change exam name
+ ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/2edb384e-9009-42ee-b738-8789888248d3)
+
 
 
 ## Support
