@@ -12,6 +12,7 @@ driver.get("https://securereg3.prometric.com/Welcome.aspx")
 
 # select step 1 in drop down menu
 programs_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlPrograms")
+# change to "STEP1" according to your need
 Select(programs_menu).select_by_value("STEP1")
 
 #select country
@@ -34,6 +35,7 @@ initial_link.click()
 search_input = WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.ID, "txtSearch"))
 )
+# change address
 search_input.send_keys("Lahore, Pakistan")
 
 # Find the search button and click it
@@ -41,6 +43,7 @@ search_button = driver.find_element(By.ID, "btnSearch")
 search_button.click()
 
 # Find the link element and click it
+# selecting center
 availability_link = WebDriverWait(driver, 10).until(
     EC.element_to_be_clickable((By.XPATH, "//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']"))
 )
