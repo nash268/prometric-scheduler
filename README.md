@@ -24,10 +24,10 @@ This project automates website interaction using Selenium WebDriver in Python an
 ### Important Notes
 - open proscheduler.py in any text editor(notepad)
 - specify month and year in python script as "12 2023"
-- find Select(dropdown_month).select_by_value("3 2024") and only change the date inside quotes
+- only change the highlighted date inside quotes
  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/1b186820-24fa-477e-8452-fc27bcfc35ee)
 
-- similarly change exam name
+- similarly change exam name inside qoutes
  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/2edb384e-9009-42ee-b738-8789888248d3)
 
 
