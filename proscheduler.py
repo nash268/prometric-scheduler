@@ -60,7 +60,7 @@ with open('month_year.txt', 'r') as file:
     user_input = file.read().strip()
 '''
 
-# Select the option with the value user_input i.e "12 2023"
+# Select the option with the value user_input i.e "12 2023".
 # select month and year.......................................
 Select(dropdown_month).select_by_value("3 2024")
 #.............................................................
