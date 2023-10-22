@@ -15,7 +15,7 @@ This project automates website interaction using Selenium WebDriver in Python an
   ```
 
 ## Python Script (`proscheduler.py`)
-- download script from top [proscheduler.py](/proscheduler.py)
+- download script file from top
 - open terminal in the same folder you have saved ``proscheduler.py``
 - inside cmd/terminal run:
   ```
