@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import TimeoutException
 
 # Assuming you've set up your WebDriver (like ChromeDriver)
 driver = webdriver.Chrome()
@@ -70,13 +71,15 @@ submit_button = driver.find_element(By.ID, "masterPage_cphPageBody_btnGoCal")
 submit_button.click()
 
 
-#check for active links... Availability
-active_links = WebDriverWait(driver, 10).until(
-    EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
-)
+try:
+    # Check for active links' availability
+    active_links = WebDriverWait(driver, 10).until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
+    )
 
-if active_links:
+    # Print each active link's text
     for link in active_links:
         print(link.text)
-else:
-    print("Not available!!")
+
+except TimeoutException:
+    print("Seats not available!! Timeout while waiting for active links.")
