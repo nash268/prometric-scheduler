@@ -1,4 +1,5 @@
 import os
+import platform
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -82,9 +83,17 @@ try:
     for link in active_links:
         print(link.text)
 
+    audiofile = "alert.mp3"
     #open a media file to alert user
     if active_links:
-        os.startfile("alert.mp3")
+        if platform.system == "Windows":
+            os.startfile(audiofile)
+        elif platform.system == "Darwin":
+            os.system(f"open {audiofile}")
+        elif platform.system == "Linux":
+            os.system(f"xdg-open {audiofile}")
+        else:
+            print("unsupported operating system/ media player to play audio!")
 
 except TimeoutException:
     print("Seats not available!! Timeout while waiting for active links.")
