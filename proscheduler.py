@@ -86,11 +86,11 @@ try:
     audiofile = "alert.mp3"
     #open a media file to alert user
     if active_links:
-        if platform.system == "Windows":
+        if platform.system() == "Windows":
             os.startfile(audiofile)
-        elif platform.system == "Darwin":
+        elif platform.system() == "Darwin":
             os.system(f"open {audiofile}")
-        elif platform.system == "Linux":
+        elif platform.system() == "Linux":
             os.system(f"xdg-open {audiofile}")
         else:
             print("unsupported operating system/ media player to play audio!")
