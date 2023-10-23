@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -80,6 +81,10 @@ try:
     # Print each active link's text
     for link in active_links:
         print(link.text)
+
+    #open a media file to alert user
+    if active_links:
+        os.startfile("alert.mp3")
 
 except TimeoutException:
     print("Seats not available!! Timeout while waiting for active links.")
