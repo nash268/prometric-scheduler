@@ -24,9 +24,9 @@ test_centers = []
 driver = webdriver.Chrome()
 
 if address == "Lahore, Pakistan":
-    test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN#8782']"]
+    test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"]
 elif address == "Karachi, Pakistan":
-    test_centers = ["//a[@title='Availability - 8781:LAHORE, PAKISTAN#8781']"]
+    test_centers = ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
 else:
     print("check address, this script only supports Karachi and Lahore/islamabad test centers")
 
