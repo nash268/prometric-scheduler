@@ -109,6 +109,7 @@ for center in test_centers:
                 os.system(f"xdg-open {audiofile}")
             else:
                 print("unsupported operating system/ media player to play audio!")
-
     except TimeoutException:
         print("Seats not available!! Timeout while waiting for active links.")
+    finally:
+        driver.quit()
