@@ -96,7 +96,7 @@ for center in test_centers:
             EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
         )
 
-        print(f"following dates are avaialbe in center: '{center}' for month and year: '{month_year}'")
+        print(f"following dates are availalbe in center: '{center}' for month and year: '{month_year}'.")
 
         # Print each active link's text
         for link in active_links:
