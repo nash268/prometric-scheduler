@@ -15,8 +15,9 @@ region = "PAK"
 # for karachi address = "Karachi, Pakistan"
 # remember to keep first letter capital
 address = "Lahore, Pakistan"
-test_centers = []
+# change month and year in qoutes
 month_year = "3 2024"
+test_centers = []
 
 
 if address == "Lahore, Pakistan":
