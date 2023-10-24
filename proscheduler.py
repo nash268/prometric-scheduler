@@ -21,6 +21,7 @@ month_year = "3 2024"
 
 
 test_centers = []
+driver = webdriver.Chrome()
 
 if address == "Lahore, Pakistan":
     test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN#8782']"]
@@ -31,8 +32,6 @@ else:
 
 
 for center in test_centers:
-    # Assuming you've set up your WebDriver (like ChromeDriver)
-    driver = webdriver.Chrome()
 
     # Open the desired URL
     driver.get("https://securereg3.prometric.com/Welcome.aspx")
@@ -114,5 +113,3 @@ for center in test_centers:
                 print("unsupported operating system/ media player to play audio!")
     except TimeoutException:
         print("Seats not available!! Timeout while waiting for active links.")
-    finally:
-        driver.quit()
