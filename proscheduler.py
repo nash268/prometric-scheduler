@@ -115,3 +115,6 @@ for center in test_centers:
                 print("unsupported operating system/ media player to play audio!")
     except TimeoutException:
         print("Seats not available!! Timeout while waiting for active links.")
+
+
+# Read LICENSE
