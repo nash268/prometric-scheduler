@@ -8,11 +8,24 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 
 
+# only change text in "" qoutes
 exam_name = "STEP1"
 region = "PAK"
+# lahore address includes islamabad test center aswell
+# for karachi address = "Karachi, Pakistan"
+# remember to keep first letter capital
 address = "Lahore, Pakistan"
+test_centers = []
 month_year = "3 2024"
-test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN#8782']"]
+
+
+if address == "Lahore, Pakistan":
+    test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN#8782']"]
+elif address == "Karachi, Pakistan":
+    test_centers = ["//a[@title='Availability - 8781:LAHORE, PAKISTAN#8781']"]
+else:
+    print("check address, this script only supports Karachi and Lahore/islamabad test centers")
+
 
 for center in test_centers:
     # Assuming you've set up your WebDriver (like ChromeDriver)
@@ -21,14 +34,13 @@ for center in test_centers:
     # Open the desired URL
     driver.get("https://securereg3.prometric.com/Welcome.aspx")
 
-    # select step 1 in drop down menu
+    # select exam_name in drop down menu
     programs_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlPrograms")
-    # change to "STEP1" according to your need
-    Select(programs_menu).select_by_value("STEP1")
+    Select(programs_menu).select_by_value(exam_name)
 
     #select country
     country_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlCountry")
-    Select(country_menu).select_by_value("PAK")
+    Select(country_menu).select_by_value(region)
 
     #click next button
     driver.find_element(By.ID, "masterPage_cphPageBody_btnNext").click()
@@ -42,12 +54,12 @@ for center in test_centers:
     initial_link.click()
 
     # wait for page to load
-    # Find the search input element and enter "Lahore, Pakistan"
+    # Find the search input element and enter address "Lahore, Pakistan"
     search_input = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, "txtSearch"))
     )
     # change address
-    search_input.send_keys("Lahore, Pakistan")
+    search_input.send_keys(address)
 
     # Find the search button and click it
     search_button = driver.find_element(By.ID, "btnSearch")
@@ -65,15 +77,10 @@ for center in test_centers:
     )
 
 
-    # Read user input from a text file
-    '''
-    with open('month_year.txt', 'r') as file:
-        user_input = file.read().strip()
-    '''
 
     # Select the option with the value user_input i.e "12 2023".
     # select month and year.......................................
-    Select(dropdown_month).select_by_value("3 2024")
+    Select(dropdown_month).select_by_value(month_year)
     #.............................................................
 
     # Find the submit button and click it
