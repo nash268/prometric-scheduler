@@ -9,6 +9,7 @@ from selenium.common.exceptions import TimeoutException
 
 
 # only change text in "" qoutes
+# for step2 exam_name = "STEP2"
 exam_name = "STEP1"
 region = "PAK"
 # lahore address includes islamabad test center aswell
