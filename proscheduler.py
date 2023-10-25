@@ -8,13 +8,13 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 
 
-'''Hello! people, you can edit code bellow to fit your needs. Remeber! only edit text inside
+'''Hello! people, you can edit code bellow to fit your needs. Remember! only edit text inside
 qoutes in front of equal sign. Also keep capital letters as they're, python is case sensitive.
 Don't add any unnecessary spaces. Also, you can store any mp3 file in the same folder to alert you
 just remember to rename it to alert.mp3
 This script was written in 2023, and it might not work because of any major website update in future.
 
-Wish you good luck for your journey!!!
+Wish you good luck for your usmle journey!!!
 '''
 
 exam_name = "STEP1"
