@@ -17,7 +17,7 @@ similarly for April 2024, change month_year = "4 2024". Don't add any extra Zero
 Also, you can store any mp3 file in the same folder to alert you. just remember to rename it to alert.mp3.
 
 This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers.
-It was written in 2023, and might not work because of any major website updates in future.
+It was written in 2023, and may not work because of any major website updates in future.
 
 Wish you good luck for your usmle journey!!!
 '''
@@ -26,25 +26,18 @@ exam_name = "STEP1"
 month_year = "3 2024"
 
 
-region = "PAK"
-addresses = ["Lahore, Pakistan", "Karachi, Pakistan"]
-islamabad_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"]
-karachi_centers = ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
+country = "PAK"
+city_centers = {
+    "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']",
+                          "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"],
+                          
+    "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
+              }
 
 audiofile = "alert.mp3"
 driver = webdriver.Chrome()
 
-for address in addresses:
-
-    test_centers = []
-
-    if address == "Lahore, Pakistan":
-        test_centers = islamabad_centers
-    elif address == "Karachi, Pakistan":
-        test_centers = karachi_centers
-    else:
-        print("check address, this script only supports Karachi and Lahore/islamabad test centers")
-
+for city, test_centers in city_centers.items():
 
     for center in test_centers:
 
@@ -57,7 +50,7 @@ for address in addresses:
 
         #select country
         country_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlCountry")
-        Select(country_menu).select_by_value(region)
+        Select(country_menu).select_by_value(country)
 
         #click next button
         driver.find_element(By.ID, "masterPage_cphPageBody_btnNext").click()
@@ -71,12 +64,12 @@ for address in addresses:
         initial_link.click()
 
         # wait for page to load
-        # Find the search input element and enter address "Lahore, Pakistan"
+        # Find the search input element and enter city "Lahore, Pakistan"
         search_input = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, "txtSearch"))
         )
-        # change address
-        search_input.send_keys(address)
+        # change city
+        search_input.send_keys(city)
 
         # Find the search button and click it
         search_button = driver.find_element(By.ID, "btnSearch")
