@@ -26,8 +26,8 @@ exam_name = "STEP1"
 month_year = "3 2024"
 
 
-region = "PAK"
-addresses = {
+country = "PAK"
+city_centers = {
     "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']",
                           "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"],
                           
@@ -37,7 +37,7 @@ addresses = {
 audiofile = "alert.mp3"
 driver = webdriver.Chrome()
 
-for address, test_centers in addresses.items():
+for city, test_centers in city_centers.items():
 
     for center in test_centers:
 
@@ -50,7 +50,7 @@ for address, test_centers in addresses.items():
 
         #select country
         country_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlCountry")
-        Select(country_menu).select_by_value(region)
+        Select(country_menu).select_by_value(country)
 
         #click next button
         driver.find_element(By.ID, "masterPage_cphPageBody_btnNext").click()
@@ -64,12 +64,12 @@ for address, test_centers in addresses.items():
         initial_link.click()
 
         # wait for page to load
-        # Find the search input element and enter address "Lahore, Pakistan"
+        # Find the search input element and enter city "Lahore, Pakistan"
         search_input = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, "txtSearch"))
         )
-        # change address
-        search_input.send_keys(address)
+        # change city
+        search_input.send_keys(city)
 
         # Find the search button and click it
         search_button = driver.find_element(By.ID, "btnSearch")
