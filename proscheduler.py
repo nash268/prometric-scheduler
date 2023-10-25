@@ -10,10 +10,14 @@ from selenium.common.exceptions import TimeoutException
 
 '''Hello! people, you can edit code bellow to fit your needs. Remember! only edit text inside
 qoutes in front of equal sign. Also keep capital letters as they're, python is case sensitive.
-Don't add any unnecessary spaces. Also, you can store any mp3 file in the same folder to alert you
-just remember to rename it to alert.mp3
-This script was written in 2023, and it might not work because of any major website update in future.
-This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers
+Don't add any unnecessary spaces.
+To select step2, change exam_name = "STEP2".
+To select month and year, for example December 2023, change month_year = "12 2023",
+similarly for April 2024, change month_year = "4 2024". Don't add any extra Zeros.
+Also, you can store any mp3 file in the same folder to alert you. just remember to rename it to alert.mp3.
+
+This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers.
+It was written in 2023, and might not work because of any major website updates in future.
 
 Wish you good luck for your usmle journey!!!
 '''
