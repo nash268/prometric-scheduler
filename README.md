@@ -34,7 +34,8 @@ on Linux/MacOS:
 ### Important Notes
 - open proscheduler.py in any text editor(notepad)
 - edit highlighted code to fit your needs
-- ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/ae8b8d72-3285-47c2-825f-089e8ab23087)
+- ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/a926bf1f-9b76-4d4e-9ace-e99540e50c99)
+
 
 - save changes and [run script](#python-script-proschedulerpy)
 
