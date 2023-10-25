@@ -27,24 +27,17 @@ month_year = "3 2024"
 
 
 region = "PAK"
-addresses = ["Lahore, Pakistan", "Karachi, Pakistan"]
-islamabad_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"]
-karachi_centers = ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
+addresses = {
+    "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']",
+                          "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"],
+                          
+    "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
+              }
 
 audiofile = "alert.mp3"
 driver = webdriver.Chrome()
 
-for address in addresses:
-
-    test_centers = []
-
-    if address == "Lahore, Pakistan":
-        test_centers = islamabad_centers
-    elif address == "Karachi, Pakistan":
-        test_centers = karachi_centers
-    else:
-        print("check address, this script only supports Karachi and Lahore/islamabad test centers")
-
+for address, test_centers in addresses.items():
 
     for center in test_centers:
 
