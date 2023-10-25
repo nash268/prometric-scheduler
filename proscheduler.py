@@ -128,6 +128,7 @@ for address in addresses:
                 else:
                     print("unsupported operating system/ media player to play audio!")
         except TimeoutException:
+            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}'.")
             print("Seats not available!! Timeout while waiting for active links.")
 
 
