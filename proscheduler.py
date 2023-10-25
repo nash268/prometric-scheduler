@@ -17,7 +17,7 @@ similarly for April 2024, change month_year = "4 2024". Don't add any extra Zero
 Also, you can store any mp3 file in the same folder to alert you. just remember to rename it to alert.mp3.
 
 This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers.
-It was written in 2023, and might not work because of any major website updates in future.
+It was written in 2023, and may not work because of any major website updates in future.
 
 Wish you good luck for your usmle journey!!!
 '''
