@@ -13,14 +13,19 @@ qoutes in front of equal sign. Also keep capital letters as they're, python is c
 Don't add any unnecessary spaces. Also, you can store any mp3 file in the same folder to alert you
 just remember to rename it to alert.mp3
 This script was written in 2023, and it might not work because of any major website update in future.
+This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers
 
 Wish you good luck for your usmle journey!!!
 '''
 
 exam_name = "STEP1"
+month_year = "3 2024"
+
+
 region = "PAK"
 addresses = ["Lahore, Pakistan", "Karachi, Pakistan"]
-month_year = "3 2024"
+islamabad_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"]
+karachi_centers = ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
 
 audiofile = "alert.mp3"
 driver = webdriver.Chrome()
@@ -30,9 +35,9 @@ for address in addresses:
     test_centers = []
 
     if address == "Lahore, Pakistan":
-        test_centers = ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']", "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"]
+        test_centers = islamabad_centers
     elif address == "Karachi, Pakistan":
-        test_centers = ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
+        test_centers = karachi_centers
     else:
         print("check address, this script only supports Karachi and Lahore/islamabad test centers")
 
