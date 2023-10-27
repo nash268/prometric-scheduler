@@ -2,10 +2,10 @@ import os
 import platform
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 
 
 '''Hello! people, you can edit code bellow to fit your needs. Remember! only edit text inside
@@ -34,7 +34,7 @@ city_centers = {
     "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
               }
 
-audiofile = "alert.mp3"
+audio_file = "alert.mp3"
 driver = webdriver.Chrome()
 
 for city, test_centers in city_centers.items():
@@ -113,11 +113,11 @@ for city, test_centers in city_centers.items():
             #open a media file to alert user
             if active_links:
                 if platform.system() == "Windows":
-                    os.startfile(audiofile)
+                    os.startfile(audio_file)
                 elif platform.system() == "Darwin":
-                    os.system(f"open {audiofile}")
+                    os.system(f"open {audio_file}")
                 elif platform.system() == "Linux":
-                    os.system(f"xdg-open {audiofile}")
+                    os.system(f"xdg-open {audio_file}")
                 else:
                     print("unsupported operating system/ media player to play audio!")
         except TimeoutException:
