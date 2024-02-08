@@ -13,6 +13,10 @@ This project automates website interaction using Selenium WebDriver in Python an
   ```
   pip install selenium webdriver-manager
   ```
+- if that doesn't work on windows. try:
+  ```
+  py -m pip install selenium webdriver-manager
+  ```
 
 ## Python Script (`proscheduler.py`)
 - [download repository](https://github.com/nash268/prometric-scheduler/archive/refs/heads/main.zip)
