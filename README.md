@@ -13,6 +13,10 @@ This project automates website interaction using Selenium WebDriver in Python an
   ```
   pip install selenium webdriver-manager
   ```
+- if that doesn't work on windows. try:
+  ```
+  py -m pip install selenium webdriver-manager
+  ```
 
 ## Python Script (`proscheduler.py`)
 - [download repository](https://github.com/nash268/prometric-scheduler/archive/refs/heads/main.zip)
@@ -40,6 +44,18 @@ on Linux/MacOS:
 
 - save changes and [run script](#python-script-proschedulerpy)
 
+
+## Schedule the script to run on specific times:
+### on MacOs and Linux you can use crontab:
+  ```
+  crontab -e
+  ```
+- use [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to set timer.
+- e.g ```*/30 * * * * cd ~/Downloads/prometric-scheduler/ && python3 proscheduler.py``` will run the script every 30 minutes 24/7.
+- copypaste the line and save the crontab file
+
+### On windows use task-scheduler:
+- [youtube.vid](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
 
 ## Support
 
