@@ -45,6 +45,18 @@ on Linux/MacOS:
 - save changes and [run script](#python-script-proschedulerpy)
 
 
+## Schedule the script to run on specific times:
+### on MacOs and Linux you can use crontab:
+  ```
+  crontab -e
+  ```
+- use [crontab.guru](https://crontab.guru/#*/15_0-23_*_*_*) to set timer.
+- e.g ```*/15 0-23 * * * cd ~/Downloads/prometric-scheduler/ && python3 proscheduler.py``` will run the script every 15 minutes 24/7.
+- save the crontab file
+
+### On windows use task-scheduler:
+- [youtube.vid](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
+
 ## Support
 
 For any issues or questions, feel free to [create an issue](https://github.com/nash268/prometric-scheduler/issues).
