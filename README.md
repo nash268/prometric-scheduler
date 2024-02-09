@@ -47,15 +47,17 @@ on Linux/MacOS:
 
 ## Schedule the script to run on specific times:
 ### on MacOs and Linux you can use crontab:
+- edit crontab file using following command: 
   ```
   crontab -e
   ```
 - use [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to set timer.
 - e.g ```*/30 * * * * cd ~/Downloads/prometric-scheduler/ && python3 proscheduler.py``` will run the script every 30 minutes 24/7.
 - copypaste the line and save the crontab file
+- once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run ```crontab -r```command in terminal.
 
 ### On windows use task-scheduler:
-- [youtube.vid](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
+- [watch youtube video](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
 
 ## Support
 
