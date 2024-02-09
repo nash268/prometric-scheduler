@@ -52,7 +52,7 @@ on Linux/MacOS:
   ```
 - use [crontab.guru](https://crontab.guru/#*/15_0-23_*_*_*) to set timer.
 - e.g ```*/15 0-23 * * * cd ~/Downloads/prometric-scheduler/ && python3 proscheduler.py``` will run the script every 15 minutes 24/7.
-- save the crontab file
+- copypaste the line and save the crontab file
 
 ### On windows use task-scheduler:
 - [youtube.vid](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
