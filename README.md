@@ -11,7 +11,7 @@ This project automates website interaction using Selenium WebDriver in Python an
 - install pip https://pip.pypa.io/en/stable/installation/
 - open cmd or terminal and run:
   ```
-  pip install selenium webdriver-manager
+  pip3 install selenium webdriver-manager
   ```
 - if that doesn't work on windows. try:
   ```
