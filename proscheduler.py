@@ -25,7 +25,7 @@ Wish you good luck for your usmle journey!!!
 exam_name = "STEP1"
 month_year = "3 2024"
 start_date = 1
-end_date = 30
+end_date = 30        # end_date wouldn't be checked
 
 
 country = "PAK"
