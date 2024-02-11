@@ -134,7 +134,7 @@ for city, test_centers in city_centers.items():
             else: 
                 print("seats not available for 27 or 28 march")
         except TimeoutException:
-            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}'.")
+            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
             print("Seats not available!! Timeout while waiting for active links.")
 
 
