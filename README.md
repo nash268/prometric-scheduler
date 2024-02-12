@@ -25,13 +25,11 @@ This project automates website interaction using Selenium WebDriver in Python an
 - inside cmd/terminal run:
 
 
-on Linux/MacOS:
+- on Linux/MacOS:
   ```
   python3 proscheduler.py
   ```
-***
-
-on Windows:
+- on Windows:
   ```
   py proscheduler.py
   ```
