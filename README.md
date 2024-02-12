@@ -24,16 +24,17 @@ This project automates website interaction using Selenium WebDriver in Python an
 - open terminal in the ``prometric-scheduler/`` folder where ``proscheduler.py`` is located
 - inside cmd/terminal run:
 
-on Windows:
-  ```
-  py proscheduler.py
-  ```
 
 on Linux/MacOS:
   ```
   python3 proscheduler.py
   ```
 ***
+
+on Windows:
+  ```
+  py proscheduler.py
+  ```
 
 ### Important Notes
 - open ``proscheduler.py`` in any text editor(notepad)
