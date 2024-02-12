@@ -122,8 +122,6 @@ for city, test_centers in city_centers.items():
 
             #play audio if dates within range found
             if any(available_dates_inrange):
-                #play media file to alert user
-                print("Playing the audio file...")
                 if platform.system() == "Windows":
                     os.startfile(audio_file)
                 elif platform.system() == "Darwin":
