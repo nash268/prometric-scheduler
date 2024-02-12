@@ -24,6 +24,8 @@ Wish you good luck for your usmle journey!!!
 
 exam_name = "STEP1"
 month_year = "3 2024"
+start_date = 1
+end_date = 32        # end_date wouldn't be checked
 
 
 country = "PAK"
@@ -104,14 +106,22 @@ for city, test_centers in city_centers.items():
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
             )
 
-            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}'.")
+            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
 
-            # Print each active link's text
-            for link in active_links:
-                print(link.text)
+            # Extract dates from active links
+            available_dates = [link.text for link in active_links]
+            # Assuming available_dates is a list of strings representing numbers
+            available_dates_int = [int(date_str) for date_str in available_dates]
+            # Check if any date in available_dates_int falls within the range from start_date to end_date
+            available_dates_inrange = [date for date in available_dates_int if start_date <= date < end_date]
 
-            #open a media file to alert user
-            if active_links:
+
+            # Print each active link (date)
+            for item in available_dates_inrange:
+                print(item)
+
+            #play audio if dates within range found
+            if any(available_dates_inrange):
                 if platform.system() == "Windows":
                     os.startfile(audio_file)
                 elif platform.system() == "Darwin":
@@ -121,7 +131,7 @@ for city, test_centers in city_centers.items():
                 else:
                     print("unsupported operating system/ media player to play audio!")
         except TimeoutException:
-            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}'.")
+            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
             print("Seats not available!! Timeout while waiting for active links.")
 
 

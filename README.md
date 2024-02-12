@@ -11,7 +11,7 @@ This project automates website interaction using Selenium WebDriver in Python an
 - install pip https://pip.pypa.io/en/stable/installation/
 - open cmd or terminal and run:
   ```
-  pip install selenium webdriver-manager
+  pip3 install selenium webdriver-manager
   ```
 - if that doesn't work on windows. try:
   ```
@@ -38,7 +38,8 @@ on Linux/MacOS:
 ### Important Notes
 - open ``proscheduler.py`` in any text editor(notepad)
 - edit highlighted code to fit your needs
-- ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/ddd261ca-c924-47ea-a1f8-34095fbc2101)
+- ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/924d6780-debc-40d1-8d5f-944a97125950)
+
 
 
 
