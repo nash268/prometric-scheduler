@@ -112,14 +112,15 @@ for city, test_centers in city_centers.items():
             available_dates = [link.text for link in active_links]
             # Assuming available_dates is a list of strings representing numbers
             available_dates_int = [int(date_str) for date_str in available_dates]
-            # Check if any date in available_dates_int falls within the range from 1 to 15
-            available_dates_inrange = (date in range(start_date, end_date) for date in available_dates_int)
+            # Check if any date in available_dates_int falls within the range from start_date to end_date
+            available_dates_inrange = [date for date in available_dates_int if start_date <= date < end_date]
 
 
-            # Print each active link's text
-            print(available_dates_inrange)
+            # Print each active link (date)
+            for item in available_dates_inrange:
+                print(item)
 
-            #check if dates are 27 or 28
+            #play audio if dates within range found
             if any(available_dates_inrange):
                 #play media file to alert user
                 print("Playing the audio file...")
@@ -131,8 +132,6 @@ for city, test_centers in city_centers.items():
                     os.system(f"xdg-open {audio_file}")
                 else:
                     print("unsupported operating system/ media player to play audio!")
-            else: 
-                print("seats not available for 27 or 28 march")
         except TimeoutException:
             print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
             print("Seats not available!! Timeout while waiting for active links.")
