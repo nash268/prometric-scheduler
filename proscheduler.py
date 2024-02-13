@@ -89,11 +89,8 @@ for city, test_centers in city_centers.items():
         )
 
 
-
-        # Select the option with the value user_input i.e "12 2023".
-        # select month and year.......................................
+        # select month and year.
         Select(dropdown_month).select_by_value(month_year)
-        #.............................................................
 
         # Find the submit button and click it
         submit_button = driver.find_element(By.ID, "masterPage_cphPageBody_btnGoCal")
@@ -106,33 +103,35 @@ for city, test_centers in city_centers.items():
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
             )
 
-            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
+            print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}:")
 
-            # Extract dates from active links
-            available_dates = [link.text for link in active_links]
-            # Assuming available_dates is a list of strings representing numbers
-            available_dates_int = [int(date_str) for date_str in available_dates]
-            # Check if any date in available_dates_int falls within the range from start_date to end_date
-            available_dates_inrange = [date for date in available_dates_int if start_date <= date < end_date]
+            # Extract dates from active links and filter based on date range
+            available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
 
 
-            # Print each active link (date)
-            for item in available_dates_inrange:
-                print(item)
+            # Print available_dates_inrange
+            print('dates found: ', available_dates_inrange)
 
-            #play audio if dates within range found
+            # opening file in different operating systems
+            os_to_command = {
+                "Windows": os.startfile,
+                "Darwin": lambda file: os.system(f"open {file}"),
+                "Linux": lambda file: os.system(f"xdg-open {file}")
+                }
+
+            # play audio if dates within range found
             if any(available_dates_inrange):
-                if platform.system() == "Windows":
-                    os.startfile(audio_file)
-                elif platform.system() == "Darwin":
-                    os.system(f"open {audio_file}")
-                elif platform.system() == "Linux":
-                    os.system(f"xdg-open {audio_file}")
+                if platform.system() in os_to_command:
+                    os_to_command[platform.system()](audio_file)
                 else:
                     print("unsupported operating system/ media player to play audio!")
-        except TimeoutException:
-            print(f"following dates are availalbe in center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}'.")
-            print("Seats not available!! Timeout while waiting for active links.")
 
+        # If no active links are found, print a message            
+        except TimeoutException:
+            print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
+            continue
+
+
+driver.close()
 
 # Read LICENSE
