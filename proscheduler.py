@@ -37,6 +37,7 @@ city_centers = {
               }
 
 audio_file = "alert.mp3"
+operating_system = platform.system()
 driver = webdriver.Chrome()
 
 for city, test_centers in city_centers.items():
@@ -121,8 +122,8 @@ for city, test_centers in city_centers.items():
 
             # play audio if dates within range found
             if any(available_dates_inrange):
-                if platform.system() in os_to_command:
-                    os_to_command[platform.system()](audio_file)
+                if operating_system in os_to_command:
+                    os_to_command[operating_system](audio_file)
                 else:
                     print("unsupported operating system/ media player to play audio!")
 
