@@ -114,7 +114,7 @@ for city, test_centers in city_centers.items():
 
             # opening file in different operating systems
             os_to_command = {
-                "Windows": os.startfile,
+                "Windows": os.startfile(file),
                 "Darwin": lambda file: os.system(f"open {file}"),
                 "Linux": lambda file: os.system(f"xdg-open {file}")
                 }
