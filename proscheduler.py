@@ -104,7 +104,7 @@ for city, test_centers in city_centers.items():
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
             )
 
-            print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}:")
+            print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}':")
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
