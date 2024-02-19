@@ -46,7 +46,7 @@ try:
         # If file exists, read values from it
         exam_name, month_year, selected_city_indices, start_date, end_date, send_msg_to_yourself, phone= file.read().split(',')
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
-        print("Values loaded from previous session.")
+        print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
     exam_name = input("Enter exam name (STEP1/STEP2): ") or "STEP1"
@@ -72,7 +72,7 @@ except FileNotFoundError:
     with open("user_input.txt", "w") as file:
         file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date},{send_msg_to_yourself},{phone}")
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
-        print("Values stored for later use.")
+        print("Values stored for later use in user_input.txt.")
 
 
 # Validate user input for city selection
