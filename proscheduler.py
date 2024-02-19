@@ -8,6 +8,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 
+prometric_logo = """
+  _____                          _        _      
+ |  __ \                        | |      (_)     
+ | |__) | __ ___  _ __ ___   ___| |_ _ __ _  ___ 
+ |  ___/ '__/ _ \| '_ ` _ \ / _ \ __| '__| |/ __|
+ | |   | | | (_) | | | | | |  __/ |_| |  | | (__ 
+ |_|   |_|  \___/|_| |_| |_|\___|\__|_|  |_|\___|
+                                                 
+                                                 
+"""
+
 
 country = "PAK"
 city_centers = {
@@ -17,7 +28,7 @@ city_centers = {
     "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
               }
 
-
+print(prometric_logo)
 print("Welcome to the Test Center Availability Checker!")
 print("------------------------------------------------")
 print("This script helps you check for available test center slots for your exam.")
@@ -38,7 +49,7 @@ try:
         print("Values loaded from previous session.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
-    exam_name = input("Enter exam name: STEP1/STEP2").capatilize()
+    exam_name = input("Enter exam name: STEP1/STEP2")
     month_year = input("Enter month and year (e.g. 3 2024): ")
 
     # Display available cities to the user and prompt for selection
@@ -85,7 +96,7 @@ print("checking...")
 
 audio_file = "alert.mp3"
 operating_system = platform.system()
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=Options().add_argument("--headless"))
 
 msg_contents = ''
 available_dates_inrange_msg = []
