@@ -9,29 +9,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
-'''Hello! people, you can edit code bellow to fit your needs. Remember! only edit text inside
-qoutes in front of equal sign. Also keep capital letters as they're, python is case sensitive.
-Don't add any unnecessary spaces.
-To select step2, change exam_name = "STEP2".
-To select month and year, for example December 2023, change month_year = "12 2023",
-similarly for April 2024, change month_year = "4 2024". Don't add any extra Zeros.
-Also, you can store any mp3 file in the same folder to alert you. just remember to rename it to alert.mp3.
-
-This script checks for open slots in Islamabad, Karachi, and Lahore prometric-test centers.
-It was written in 2023, and may not work because of any major website updates in future.
-
-Wish you good luck for your usmle journey!!!
-'''
-
-exam_name = "STEP1"
-month_year = "3 2024"
-start_date = 1
-end_date = 32        # end_date wouldn't be checked
-
-send_msg_to_yourself = False  # set to True if you want to send msg if any dates found
-phone = "+923xxxxxxxxx"
-
 country = "PAK"
 city_centers = {
     "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']",
@@ -39,6 +16,72 @@ city_centers = {
                           
     "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
               }
+
+
+print("Welcome to the Test Center Availability Checker!")
+print("------------------------------------------------")
+print("This script helps you check for available test center slots for your exam.")
+print("You'll be prompted to provide some initial information, such as the exam name, month and year,")
+print("and date range to search for available slots.")
+print("If desired, you can also choose to receive a WhatsApp message notification with the results.")
+print("Please ensure that WhatsApp is logged in to your default browser for this feature to work.")
+print("Let's get started!")
+print("------------------------------------------------")
+
+
+# Check if it's the first time running the script
+try:
+    with open("user_input.txt", "r") as file:
+        # If file exists, read values from it
+        exam_name, month_year, selected_city_indices, start_date, end_date, send_msg_to_yourself, phone= file.read().split(',')
+        selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
+        print("Values loaded from previous session.")
+except FileNotFoundError:
+    # If file doesn't exist, prompt user for input
+    exam_name = input("Enter exam name: ")
+    month_year = input("Enter month and year (e.g., '3 2024'): ")
+
+    # Display available cities to the user and prompt for selection
+    print("Available cities:")
+    for index, city in enumerate(city_centers.keys(), start=1):
+        print(f"{index}. {city}")
+
+    # input for cities
+    selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ")
+
+    start_date = int(input("Enter start date: "))
+    end_date = int(input("Enter end date: "))
+    send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
+    if send_msg_to_yourself == "yes":
+        phone = input("whatsapp number: ")
+    else:
+        phone = ""
+
+    # Write input values to file for later use
+    with open("user_input.txt", "w") as file:
+        file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date},{send_msg_to_yourself},{phone}")
+        selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
+        print("Values stored for later use.")
+
+
+# Validate user input for city selection
+for index in selected_city_indices:
+    if index < 1 or index > len(city_centers):
+        print("Invalid selection. Please enter numbers within the range.")
+        exit()
+
+# Gather selected test centers based on user input
+selected_test_centers = {city: centers for city, centers in city_centers.items()}
+
+# If not all centers are selected, filter selected_test_centers based on user input
+if len(selected_city_indices) < len(city_centers):
+    selected_cities = [city[index - 1] for index in selected_city_indices]
+    selected_test_centers = {city: centers for city, centers in selected_test_centers.items() if city in selected_cities}
+
+
+# Now you can proceed with checking availability for the selected test centers
+print("checking...")
+
 
 audio_file = "alert.mp3"
 operating_system = platform.system()
@@ -56,7 +99,7 @@ def send_msg(msg_body, phone):
         print("unexpected error when sending whatsapp message")
 
 
-for city, test_centers in city_centers.items():
+for city, test_centers in selected_test_centers.items():
 
     for center in test_centers:
 
@@ -156,7 +199,7 @@ for city, test_centers in city_centers.items():
 
 driver.close()
 
-if any(available_dates_inrange_msg) and (send_msg_to_yourself):
+if any(available_dates_inrange_msg) and (send_msg_to_yourself == "yes"):
     send_msg(msg_contents, phone)
 
 # Read LICENSE
