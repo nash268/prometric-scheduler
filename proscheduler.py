@@ -49,8 +49,8 @@ try:
         print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
-    exam_name = input("Enter exam name (STEP1/STEP2): ") or "STEP1"
-    month_year = input("Enter month and year (3 2024): ") or "6 2024"
+    exam_name = input("Enter exam name (STEP1/STEP2): ")
+    month_year = input("Enter month and year (3 2024): ")
 
     # Display available cities to the user and prompt for selection
     print("Available cities:")
