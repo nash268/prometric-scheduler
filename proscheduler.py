@@ -47,13 +47,13 @@ except FileNotFoundError:
         print(f"{index}. {city}")
 
     # input for cities
-    selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ")
+    selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ") or '1 2'
 
-    start_date = int(input("Enter start date: "))
-    end_date = int(input("Enter end date: "))
+    start_date = int(input("Enter start date: ")) or 1
+    end_date = int(input("Enter end date: ")) or 32
     send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
     if send_msg_to_yourself == "yes":
-        phone = input("whatsapp number: ")
+        phone = input("whatsapp number: +923xxxxxxxxx")
     else:
         phone = ""
 
