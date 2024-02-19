@@ -61,7 +61,7 @@ except FileNotFoundError:
     selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ") or '1 2'
 
     start_date = int(input("Enter start date (1): "))
-    end_date = int(input("Enter end date (2): "))
+    end_date = int(input("Enter end date (32): "))
     send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
     if send_msg_to_yourself == "yes":
         phone = input("whatsapp number (+923xxxxxxxxx): ")
@@ -86,7 +86,7 @@ selected_test_centers = {city: centers for city, centers in city_centers.items()
 
 # If not all centers are selected, filter selected_test_centers based on user input
 if len(selected_city_indices) < len(city_centers):
-    selected_cities = [city[index - 1] for index in selected_city_indices]
+    selected_cities = [list(city_centers.keys())[index - 1] for index in selected_city_indices]
     selected_test_centers = {city: centers for city, centers in selected_test_centers.items() if city in selected_cities}
 
 
