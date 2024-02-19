@@ -1,11 +1,13 @@
 import os
 import platform
+import pywhatkit
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
+
 
 
 '''Hello! people, you can edit code bellow to fit your needs. Remember! only edit text inside
@@ -27,6 +29,8 @@ month_year = "3 2024"
 start_date = 1
 end_date = 32        # end_date wouldn't be checked
 
+send_msg_to_yourself = False  # set to True if you want to send msg if any dates found
+phone = "+923xxxxxxxxx"
 
 country = "PAK"
 city_centers = {
@@ -39,6 +43,18 @@ city_centers = {
 audio_file = "alert.mp3"
 operating_system = platform.system()
 driver = webdriver.Chrome()
+
+msg_contents = ''
+available_dates_inrange_msg = []
+
+def send_msg(msg_body, phone):
+    try:
+        # wait 60 seconds before sending to let things load
+        pywhatkit.sendwhatmsg_instantly(phone, msg_body, 60, close_tab=True)
+        print("message sent successfully!")
+    except:
+        print("unexpected error when sending whatsapp message")
+
 
 for city, test_centers in city_centers.items():
 
@@ -105,6 +121,8 @@ for city, test_centers in city_centers.items():
             )
 
             print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}':")
+            # create whatsapp msg contents
+            msg_contents += f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}': "
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
@@ -112,6 +130,9 @@ for city, test_centers in city_centers.items():
 
             # Print available_dates_inrange
             print('dates found: ', available_dates_inrange)
+            # create whatsapp msg content
+            available_dates_inrange_msg.extend(available_dates_inrange)
+            msg_contents += f"dates found: {available_dates_inrange}"
 
             # opening file in different operating systems
             os_to_command = {
@@ -134,5 +155,8 @@ for city, test_centers in city_centers.items():
 
 
 driver.close()
+
+if any(available_dates_inrange_msg) and (send_msg_to_yourself):
+    send_msg(msg_contents, phone)
 
 # Read LICENSE
