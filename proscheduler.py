@@ -49,8 +49,8 @@ try:
         print("Values loaded from previous session.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
-    exam_name = input("Enter exam name: STEP1/STEP2")
-    month_year = input("Enter month and year (e.g. 3 2024): ")
+    exam_name = input("Enter exam name (STEP1/STEP2): ") or "STEP1"
+    month_year = input("Enter month and year (3 2024): ") or "6 2024"
 
     # Display available cities to the user and prompt for selection
     print("Available cities:")
@@ -60,11 +60,11 @@ except FileNotFoundError:
     # input for cities
     selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ") or '1 2'
 
-    start_date = int(input("Enter start date: ")) or 1
-    end_date = int(input("Enter end date: ")) or 32
+    start_date = int(input("Enter start date (1): "))
+    end_date = int(input("Enter end date (2): "))
     send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
     if send_msg_to_yourself == "yes":
-        phone = input("whatsapp number: +923xxxxxxxxx")
+        phone = input("whatsapp number (+923xxxxxxxxx): ")
     else:
         phone = ""
 
