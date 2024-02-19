@@ -38,8 +38,8 @@ try:
         print("Values loaded from previous session.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
-    exam_name = input("Enter exam name: ")
-    month_year = input("Enter month and year (e.g., '3 2024'): ")
+    exam_name = input("Enter exam name: STEP1/STEP2").capatilize()
+    month_year = input("Enter month and year (e.g. 3 2024): ")
 
     # Display available cities to the user and prompt for selection
     print("Available cities:")
