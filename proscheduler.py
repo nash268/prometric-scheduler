@@ -4,6 +4,7 @@ import pywhatkit
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
@@ -46,6 +47,8 @@ try:
         # If file exists, read values from it
         exam_name, month_year, selected_city_indices, start_date, end_date, send_msg_to_yourself, phone= file.read().split(',')
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
+        start_date = int(start_date)
+        end_date = int(end_date)
         print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
@@ -96,7 +99,7 @@ print("checking...")
 
 audio_file = "alert.mp3"
 operating_system = platform.system()
-driver = webdriver.Chrome(options=Options().add_argument("--headless"))
+driver = webdriver.Chrome(options=Options().add_argument('--headless'))
 
 msg_contents = ''
 available_dates_inrange_msg = []
@@ -112,6 +115,8 @@ def send_msg(msg_body, phone):
 
 
 # progress bar function
+i = 1
+total_iterations = 100
 def print_progress_bar(iteration, total, bar_length=50):
     percent = "{0:.1f}".format(100 * (iteration / float(total)))
     filled_length = int(bar_length * iteration // total)
@@ -122,13 +127,9 @@ def print_progress_bar(iteration, total, bar_length=50):
 for city, test_centers in selected_test_centers.items():
 
     for center in test_centers:
-        # update progress bar
-        print_progress_bar(i + 1, total_iterations)
 
         # Open the desired URL
         driver.get("https://securereg3.prometric.com/Welcome.aspx")
-
-        print_progress_bar(i + 2, total_iterations)
 
         # select exam_name in drop down menu
         programs_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlPrograms")
@@ -138,7 +139,6 @@ for city, test_centers in selected_test_centers.items():
         country_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlCountry")
         Select(country_menu).select_by_value(country)
 
-        print_progress_bar(i + 2, total_iterations)
 
         #click next button
         driver.find_element(By.ID, "masterPage_cphPageBody_btnNext").click()
@@ -151,7 +151,6 @@ for city, test_centers in selected_test_centers.items():
         )
         initial_link.click()
 
-        print_progress_bar(i + 5, total_iterations)
 
         # wait for page to load
         # Find the search input element and enter city "Lahore, Pakistan"
@@ -161,7 +160,6 @@ for city, test_centers in selected_test_centers.items():
         # change city
         search_input.send_keys(city)
 
-        print_progress_bar(i + 2, total_iterations)
 
         # Find the search button and click it
         search_button = driver.find_element(By.ID, "btnSearch")
@@ -173,7 +171,6 @@ for city, test_centers in selected_test_centers.items():
         )
         availability_link.click()
 
-        print_progress_bar(i + 3, total_iterations)
 
         # Find the dropdown element
         dropdown_month = WebDriverWait(driver, 10).until(
@@ -183,8 +180,6 @@ for city, test_centers in selected_test_centers.items():
 
         # select month and year.
         Select(dropdown_month).select_by_value(month_year)
-
-        print_progress_bar(i + 2, total_iterations)
 
         # Find the submit button and click it
         submit_button = driver.find_element(By.ID, "masterPage_cphPageBody_btnGoCal")
@@ -236,5 +231,4 @@ driver.close()
 if any(available_dates_inrange_msg) and (send_msg_to_yourself == "yes"):
     send_msg(msg_contents, phone)
 
-print_progress_bar(total_iterations, total_iterations)
 # Read LICENSE
