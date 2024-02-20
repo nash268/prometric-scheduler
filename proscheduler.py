@@ -191,7 +191,7 @@ for city, test_centers in selected_test_centers.items():
 
 
             # Print available_dates_inrange
-            print('dates found: ', available_dates_inrange)
+            print('\033[92m' + 'dates found: ' + '\033[0m', available_dates_inrange)
 
             # opening file in different operating systems
             os_to_command = {
@@ -212,7 +212,7 @@ for city, test_centers in selected_test_centers.items():
             # update print_progress_bar at end of 2nd loop
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
-            print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
+            print(f'\033[91mNo seats found for \'{center}\' in \'{month_year}\' from \'{start_date}\' to \'{end_date}\'.\033[0m')
             continue
 
 
