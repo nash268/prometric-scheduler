@@ -47,8 +47,6 @@ try:
         # If file exists, read values from it
         exam_name, month_year, selected_city_indices, start_date, end_date, send_msg_to_yourself, phone= file.read().split(',')
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
-        start_date = int(start_date)
-        end_date = int(end_date)
         print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
@@ -63,8 +61,8 @@ except FileNotFoundError:
     # input for cities
     selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ") or '1 2'
 
-    start_date = int(input("Enter start date (1): "))
-    end_date = int(input("Enter end date (32): "))
+    start_date = input("Enter start date (1): ")
+    end_date = input("Enter end date (32): ")
     send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
     if send_msg_to_yourself == "yes":
         phone = input("whatsapp number (+923xxxxxxxxx): ")
@@ -83,6 +81,11 @@ for index in selected_city_indices:
     if index < 1 or index > len(city_centers):
         print("Invalid selection. Please enter numbers within the range.")
         exit()
+
+# formating variables
+exam_name = exam_name.upper()
+start_date = int(start_date)
+end_date = int(end_date)
 
 # Gather selected test centers based on user input
 selected_test_centers = {city: centers for city, centers in city_centers.items()}
@@ -116,7 +119,7 @@ def send_msg(msg_body, phone):
 
 # progress bar function
 total_iterations = len(selected_test_centers) * sum(len(test_centers) for test_centers in selected_test_centers.values())
-current_iteration = 0
+current_iterations = 0
 def print_progress_bar(iteration, total, bar_length=50):
     percent = "{0:.1f}".format(100 * (iteration / float(total)))
     filled_length = int(bar_length * iteration // total)
@@ -222,16 +225,16 @@ for city, test_centers in selected_test_centers.items():
 
             
             # update print_progress_bar
-            current_iteration += 1
-            print_progress_bar(current_iteration, total_iterations)
+            current_iterations += 1
+            print_progress_bar(current_iterations, total_iterations)
 
         # If no active links are found, print a message            
         except TimeoutException:
             print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
 
             # update print_progress_bar
-            current_iteration += 1
-            print_progress_bar(current_iteration, total_iterations)
+            current_iterations += 1
+            print_progress_bar(current_iterations, total_iterations)
             continue
 
 
