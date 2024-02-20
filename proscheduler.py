@@ -180,6 +180,10 @@ for city, test_centers in selected_test_centers.items():
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
             )
 
+            # update print_progress_bar at end of 2nd loop
+            current_iterations += 1
+            print_progress_bar(current_iterations, total_iterations)
+
             print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}':")
 
             # Extract dates from active links and filter based on date range
@@ -205,12 +209,11 @@ for city, test_centers in selected_test_centers.items():
 
         # If no active links are found, print a message            
         except TimeoutException:
+            # update print_progress_bar at end of 2nd loop
+            current_iterations += 1
+            print_progress_bar(current_iterations, total_iterations)
             print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
             continue
-        
-        # update print_progress_bar at end of 2nd loop
-        current_iterations += 1
-        print_progress_bar(current_iterations, total_iterations)
 
 
 driver.close()
