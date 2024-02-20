@@ -44,7 +44,6 @@ try:
     with open("user_input.txt", "r") as file:
         # If file exists, read values from it
         exam_name, month_year, selected_city_indices, start_date, end_date= file.read().split(',')
-        selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
         print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
     # If file doesn't exist, prompt user for input
@@ -65,7 +64,6 @@ except FileNotFoundError:
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
         file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date}")
-        selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
         print("Values stored for later use in user_input.txt.")
 
 
@@ -76,6 +74,7 @@ for index in selected_city_indices:
         exit()
 
 # formating variables
+selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
 exam_name = exam_name.upper()
 start_date = int(start_date)
 end_date = int(end_date)
