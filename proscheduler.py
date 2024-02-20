@@ -1,6 +1,5 @@
 import os
 import platform
-import pywhatkit
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -35,8 +34,7 @@ print("------------------------------------------------")
 print("This script helps you check for available test center slots for your exam.")
 print("You'll be prompted to provide some initial information, such as the exam name, month and year,")
 print("and date range to search for available slots.")
-print("If desired, you can also choose to receive a WhatsApp message notification with the results.")
-print("Please ensure that WhatsApp is logged in to your default browser for this feature to work.")
+print("Once dates found it will play alert.mp3")
 print("Let's get started!")
 print("------------------------------------------------")
 
@@ -45,7 +43,7 @@ print("------------------------------------------------")
 try:
     with open("user_input.txt", "r") as file:
         # If file exists, read values from it
-        exam_name, month_year, selected_city_indices, start_date, end_date, send_msg_to_yourself, phone= file.read().split(',')
+        exam_name, month_year, selected_city_indices, start_date, end_date= file.read().split(',')
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
         print("Values loaded from previous session file user_input.txt.")
 except FileNotFoundError:
@@ -63,15 +61,10 @@ except FileNotFoundError:
 
     start_date = input("Enter start date (1): ")
     end_date = input("Enter end date (32): ")
-    send_msg_to_yourself = input("send whatsapp message to yourself(whatsapp must be logged in default browser). yes/no: ")
-    if send_msg_to_yourself == "yes":
-        phone = input("whatsapp number (+923xxxxxxxxx): ")
-    else:
-        phone = ""
 
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
-        file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date},{send_msg_to_yourself},{phone}")
+        file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date}")
         selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
         print("Values stored for later use in user_input.txt.")
 
@@ -106,18 +99,6 @@ operating_system = platform.system()
 options = Options()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
-
-msg_contents = ''
-available_dates_inrange_msg = []
-
-# send whatsapp message function
-def send_msg(msg_body, phone):
-    try:
-        # wait 60 seconds before sending to let things load
-        pywhatkit.sendwhatmsg_instantly(phone, msg_body, 60, close_tab=True)
-        print("message sent successfully!")
-    except:
-        print("unexpected error when sending whatsapp message")
 
 
 # progress bar function
@@ -201,8 +182,6 @@ for city, test_centers in selected_test_centers.items():
             )
 
             print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}':")
-            # create whatsapp msg contents
-            msg_contents += f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}': "
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
@@ -210,9 +189,6 @@ for city, test_centers in selected_test_centers.items():
 
             # Print available_dates_inrange
             print('dates found: ', available_dates_inrange)
-            # create whatsapp msg content
-            available_dates_inrange_msg.extend(available_dates_inrange)
-            msg_contents += f"dates found: {available_dates_inrange}"
 
             # opening file in different operating systems
             os_to_command = {
@@ -241,8 +217,5 @@ for city, test_centers in selected_test_centers.items():
 driver.close()
 
 print_progress_bar(total_iterations, total_iterations)
-
-if any(available_dates_inrange_msg) and (send_msg_to_yourself == "yes"):
-    send_msg(msg_contents, phone)
 
 # Read LICENSE
