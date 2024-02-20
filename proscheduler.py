@@ -115,8 +115,8 @@ def send_msg(msg_body, phone):
 
 
 # progress bar function
-i = 1
-total_iterations = 100
+total_iterations = len(selected_test_centers) * sum(len(test_centers) for test_centers in selected_test_centers.values())
+current_iteration = 0
 def print_progress_bar(iteration, total, bar_length=50):
     percent = "{0:.1f}".format(100 * (iteration / float(total)))
     filled_length = int(bar_length * iteration // total)
@@ -220,9 +220,18 @@ for city, test_centers in selected_test_centers.items():
                 else:
                     print("unsupported operating system/ media player to play audio!")
 
+            
+            # update print_progress_bar
+            current_iteration += 1
+            print_progress_bar(current_iteration, total_iterations)
+
         # If no active links are found, print a message            
         except TimeoutException:
             print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
+
+            # update print_progress_bar
+            current_iteration += 1
+            print_progress_bar(current_iteration, total_iterations)
             continue
 
 
