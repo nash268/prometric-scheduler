@@ -186,13 +186,12 @@ for city, test_centers in selected_test_centers.items():
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
 
-            print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
-
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
 
 
             # Print available_dates_inrange
+            print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
             print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
 
             # opening file in different operating systems
