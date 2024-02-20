@@ -66,6 +66,11 @@ except FileNotFoundError:
         file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date}")
         print("Values stored for later use in user_input.txt.")
 
+# formating variables
+selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
+exam_name = exam_name.upper()
+start_date = int(start_date)
+end_date = int(end_date)
 
 # Validate user input for city selection
 for index in selected_city_indices:
@@ -73,11 +78,6 @@ for index in selected_city_indices:
         print("Invalid selection. Please enter numbers within the range.")
         exit()
 
-# formating variables
-selected_city_indices = [int(index) for index in selected_city_indices.split(' ')]
-exam_name = exam_name.upper()
-start_date = int(start_date)
-end_date = int(end_date)
 
 # Gather selected test centers based on user input
 selected_test_centers = {city: centers for city, centers in city_centers.items()}
