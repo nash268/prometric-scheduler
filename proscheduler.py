@@ -115,6 +115,8 @@ def print_progress_bar(iteration, total, bar_length=50):
 for city, test_centers in selected_test_centers.items():
 
     for center in test_centers:
+        # extract city_name from center for later use with print statement
+        city_name = center.split(":")[1].split(",")[0].strip()
 
         # Open the desired URL
         driver.get("https://securereg3.prometric.com/Welcome.aspx")
@@ -183,8 +185,6 @@ for city, test_centers in selected_test_centers.items():
             # update print_progress_bar at end of 2nd loop
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
-
-            city_name = center.split(":")[1].split(",")[0].strip()
 
             print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
 
