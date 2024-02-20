@@ -226,19 +226,14 @@ for city, test_centers in selected_test_centers.items():
                 else:
                     print("unsupported operating system/ media player to play audio!")
 
-            
-            # update print_progress_bar
-            current_iterations += 1
-            print_progress_bar(current_iterations, total_iterations)
-
         # If no active links are found, print a message            
         except TimeoutException:
             print(f"No seats found for '{center}' in '{month_year}' from '{start_date}' to '{end_date}'.")
-
-            # update print_progress_bar
-            current_iterations += 1
-            print_progress_bar(current_iterations, total_iterations)
             continue
+        
+        # update print_progress_bar at end of 2nd loop
+        current_iterations += 1
+        print_progress_bar(current_iterations, total_iterations)
 
 
 driver.close()
