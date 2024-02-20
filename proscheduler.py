@@ -102,7 +102,10 @@ print("checking...")
 
 audio_file = "alert.mp3"
 operating_system = platform.system()
-driver = webdriver.Chrome(options=Options().add_argument('--headless'))
+# invisible browser
+options = ChromeOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
 
 msg_contents = ''
 available_dates_inrange_msg = []
