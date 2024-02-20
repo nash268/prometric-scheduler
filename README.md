@@ -33,11 +33,13 @@ This project automates website interaction using Selenium WebDriver in Python an
   ```
   py proscheduler.py
   ```
+  
+[running script](https://github.com/nash268/prometric-scheduler/assets/130772656/527a7507-f5b7-4116-a172-07ed747a9572)
 
-### Instructions:
-
-[proscheduler_py.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/cf0d5f68-c032-48c8-968a-b59cc713bcf7)
-
+- running script for first time will ask you few relevant questions
+- values are then stored in `user_input.txt`
+- next time the script runs, values are loaded from `user_input.txt`
+- to change values, delete `user_input.txt` and run script again
 
 
 
