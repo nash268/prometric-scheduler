@@ -184,14 +184,14 @@ for city, test_centers in selected_test_centers.items():
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
 
-            print(f"center '{center}' for month and year '{month_year}' in range '{start_date}'-'{end_date}':")
+            print(f"for {center} in {month_year} from {start_date} to {end_date}: ")
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
 
 
             # Print available_dates_inrange
-            print('\033[92m' + 'dates found: ' + '\033[0m', available_dates_inrange)
+            print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
 
             # opening file in different operating systems
             os_to_command = {
@@ -212,7 +212,7 @@ for city, test_centers in selected_test_centers.items():
             # update print_progress_bar at end of 2nd loop
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
-            print(f'\033[91mNo seats found for \'{center}\' in \'{month_year}\' from \'{start_date}\' to \'{end_date}\'.\033[0m')
+            print(f'\033[91mNo seats found for {center} in {month_year} from {start_date} to {end_date}.\033[0m')
             continue
 
 
