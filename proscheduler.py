@@ -103,7 +103,7 @@ print("checking...")
 audio_file = "alert.mp3"
 operating_system = platform.system()
 # invisible browser
-options = ChromeOptions()
+options = Options()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
 
@@ -127,7 +127,9 @@ def print_progress_bar(iteration, total, bar_length=50):
     percent = "{0:.1f}".format(100 * (iteration / float(total)))
     filled_length = int(bar_length * iteration // total)
     bar = '=' * filled_length + '-' * (bar_length - filled_length)
+    print()
     print(f'\rProgress: [{bar}] {percent}% complete', end='', flush=True)
+    print()
 
 
 for city, test_centers in selected_test_centers.items():
