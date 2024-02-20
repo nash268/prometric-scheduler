@@ -34,15 +34,12 @@ This project automates website interaction using Selenium WebDriver in Python an
   py proscheduler.py
   ```
 
-### Important Notes
-- open ``proscheduler.py`` in any text editor(notepad)
-- edit highlighted code to fit your needs
-- ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/924d6780-debc-40d1-8d5f-944a97125950)
+### Instructions:
+
+- [running script for first time](https://screencast.apps.chrome/19pHotMeOLrdfMIWLeS1LcB3kqzWIcB1p?createdTime=2024-02-20T12%3A09%3A34.885Z)
 
 
 
-
-- save changes and [run script](#python-script-proschedulerpy)
 
 
 ## Schedule the script to run on specific times:
