@@ -243,6 +243,8 @@ for city, test_centers in selected_test_centers.items():
 
 driver.close()
 
+print_progress_bar(total_iterations, total_iterations)
+
 if any(available_dates_inrange_msg) and (send_msg_to_yourself == "yes"):
     send_msg(msg_contents, phone)
 
