@@ -191,7 +191,7 @@ for city, test_centers in selected_test_centers.items():
 
 
             # Print available_dates_inrange
-            print('\033[92m' + 'dates found: ' + '\033[0m', available_dates_inrange)
+            print('\033[92m' + 'dates found: ' + ', '.join(available_dates_inrange) + '\033[0m')
 
             # opening file in different operating systems
             os_to_command = {
