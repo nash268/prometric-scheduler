@@ -184,7 +184,9 @@ for city, test_centers in selected_test_centers.items():
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
 
-            print(f"for {center} in {month_year} from {start_date} to {end_date}: ")
+            city_name = center.split(":")[1].split(",")[0].strip()
+
+            print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
@@ -212,7 +214,7 @@ for city, test_centers in selected_test_centers.items():
             # update print_progress_bar at end of 2nd loop
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
-            print(f'\033[91mNo seats found for {center} in {month_year} from {start_date} to {end_date}.\033[0m')
+            print(f'\033[91mNo seats found for {city_name} in {month_year} from {start_date} to {end_date}.\033[0m')
             continue
 
 
