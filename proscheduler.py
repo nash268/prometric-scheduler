@@ -181,8 +181,8 @@ class CronJobs:
 
     def create_job(self, schedule, script_path, script_name):
         # Find the display value using grep
-        grep_command = "grep -oP ':\d+' <(who) | head -n 1"
-        display_process = subprocess.Popen(grep_command, stdout=subprocess.PIPE, shell=True)
+        command = "who | grep -oP ':\d+' | head -n 1"
+        display_process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         display_output = display_process.communicate()[0].decode().strip()
         display = display_output.splitlines()[0] if display_output else ""
         # command for setting up cronjob
