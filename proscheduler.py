@@ -4,7 +4,6 @@ import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
@@ -195,10 +194,8 @@ if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_t
 
 
 
-# invisible browser
-options = Options()
-options.add_argument("--headless=new")
-driver = webdriver.Chrome(options=options)
+# loading webdriver for chrome
+driver = webdriver.Chrome()
 
 for city, test_centers in selected_test_centers.items():
 
