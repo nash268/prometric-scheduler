@@ -66,18 +66,18 @@ except FileNotFoundError:
 
     start_date = input("Enter start date (1): ")
     end_date = input("Enter end date (31): ")
-    print("")
-    if (operating_system == "Linux" or operating_system == "Darwin"):
-        print("\033[33mWarning! This will delete all other cronjobs\033[0m")
 
-    schedule_task = input("Schedule script to run automatically(yes/no): ")
+    if (operating_system == "Linux" or operating_system == "Darwin"):
+        print("")
+        print("\033[33mWarning! This will delete all other cronjobs\033[0m")
+        schedule_task = input("Schedule script to run automatically(yes/no): ")
+    
     if schedule_task == "yes":
-        if (operating_system == "Linux" or operating_system == "Darwin"):
-            print("")
-            print("------------------------------------------------------------")
-            print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
-            print("for more info visit https://crontab.guru website")
-            print("------------------------------------------------------------")
+        print("")
+        print("------------------------------------------------------------")
+        print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
+        print("for more info visit https://crontab.guru website")
+        print("------------------------------------------------------------")
         schedule = input("how frequently you want to run script?: ")
 
     # Write input values to file for later use

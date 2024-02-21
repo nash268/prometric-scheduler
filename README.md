@@ -36,27 +36,14 @@ This project automates website interaction using Selenium WebDriver in Python an
   
 - [running script](https://github.com/nash268/prometric-scheduler/assets/130772656/527a7507-f5b7-4116-a172-07ed747a9572)
 
-- running script for first time will ask you few relevant questions
-- values are then stored in `user_input.txt`
-- next time the script runs, values are loaded from `user_input.txt`
-- to change values, delete `user_input.txt` and run script again
+- When running the script for the first time, it will prompt you with a few relevant questions.
+- The provided values are then saved in the `user_input.txt` file.
+- Subsequent runs of the script will automatically load values from the `user_input.txt` file.
+- To update the stored values, simply delete the `user_input.txt` file and rerun the script.
+- For Linux and MacOS users, the script utilizes crontab for scheduling automatic runs. Visit [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to configure the timing.
+- once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run `crontab -r` command in terminal.
+- on windows this feature isn't available for now, you can manually set time using windows task-scheduler, [watch youtube video.](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
 
-
-
-
-## Schedule the script to run on specific times:
-### on MacOs and Linux you can use crontab:
-- edit crontab file using following command: 
-  ```
-  crontab -e
-  ```
-- use [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to set timer.
-- e.g ```*/30 * * * * cd ~/Downloads/prometric-scheduler/ && python3 proscheduler.py``` will run the script every 30 minutes 24/7.
-- copypaste the line and save the crontab file
-- once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run ```crontab -r```command in terminal.
-
-### On windows use task-scheduler:
-- [watch youtube video](https://www.youtube.com/watch?v=IsuAltPOiEw&t=112s)
 
 ## Support
 
