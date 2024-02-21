@@ -143,6 +143,7 @@ class WindowsTasks:
         subprocess.run(delete_command, shell=True)
 
     def create_task(self, task_name, schedule, script_path, script_name):
+        # get display
         display = os.popen("grep -oP ':\d+' <(who) | head -n 1").read().strip()
         
         # Command to schedule the task
