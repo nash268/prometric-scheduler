@@ -143,11 +143,9 @@ class WindowsTasks:
         subprocess.run(delete_command, shell=True)
 
     def create_task(self, task_name, schedule, script_path, script_name):
-        # get display
-        display = os.popen("grep -oP ':\d+' <(who) | head -n 1").read().strip()
         
         # Command to schedule the task
-        command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+        command = f'Schtasks /create /sc minute /mo {schedule} /tn "{task_name}" /tr "cmd /c cd /d {script_path} && py {script_name}"'
 
         # Execute the command to create the task
         subprocess.run(command, shell=True)
@@ -182,8 +180,11 @@ class CronJobs:
         subprocess.run(delete_command, shell=True)
 
     def create_job(self, schedule, script_path, script_name):
-        # Command to add the cron job
-        command = f'(crontab -l; echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+        # Find the display value using grep
+        display = os.popen("grep -oP ':\d+' <(who) | head -n 1").read().strip()
+        # command for setting up cronjob
+        command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+
         subprocess.run(command, shell=True)
 
 # create cron job
