@@ -179,15 +179,18 @@ class CronJobs:
         delete_command = f'crontab -r'
         subprocess.run(delete_command, shell=True)
 
-    def create_job(self, schedule, script_path, script_name):
-        # Find the display value using grep
-        command = "who | grep -oP ':\d+' | head -n 1"
-        display_process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-        display_output = display_process.communicate()[0].decode().strip()
-        display = display_output.splitlines()[0] if display_output else ""
-        # command for setting up cronjob
-        command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
-
+    def create_job(self, operating_system, schedule, script_path, script_name):
+        if operating_system == "Linux":
+            # Find the display value using grep
+            command = "who | grep -oP ':\d+' | head -n 1"
+            display_process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+            display_output = display_process.communicate()[0].decode().strip()
+            display = display_output.splitlines()[0] if display_output else ""
+            # command for setting up cronjob
+            command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+        elif operating_system == "Darwin":
+            command = f'(crontab -l; echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+            
         subprocess.run(command, shell=True)
 
 # create cron job
@@ -196,7 +199,7 @@ if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_t
     script_name = "proscheduler.py"
     cron = CronJobs()
     cron.delete_job()
-    cron.create_job(schedule, script_path, script_name)
+    cron.create_job(operating_system, schedule, script_path, script_name)
 
 
 
