@@ -66,6 +66,9 @@ except FileNotFoundError:
 
     start_date = input("Enter start date (1): ")
     end_date = input("Enter end date (31): ")
+    print("")
+    if (operating_system == "Linux" or operating_system == "Darwin"):
+        print("\033[33mWarning! This will delete all other cronjobs\033[0m")
 
     schedule_task = input("Schedule script to automatically(yes/no): ")
     if schedule_task == "yes":
