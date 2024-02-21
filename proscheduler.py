@@ -143,9 +143,10 @@ class WindowsTasks:
         subprocess.run(delete_command, shell=True)
 
     def create_task(self, task_name, schedule, script_path, script_name):
+        display = os.popen("grep -oP ':\d+' <(who) | head -n 1").read().strip()
         
         # Command to schedule the task
-        command = f'Schtasks /create /sc minute /mo {schedule} /tn "{task_name}" /tr "cmd /c cd /d {script_path} && py {script_name}"'
+        command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
 
         # Execute the command to create the task
         subprocess.run(command, shell=True)
