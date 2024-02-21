@@ -59,7 +59,7 @@ except FileNotFoundError:
     selected_city_indices = input("Enter the numbers corresponding to the cities you want to check (separated by space): ") or '1 2'
 
     start_date = input("Enter start date (1): ")
-    end_date = input("Enter end date (32): ")
+    end_date = input("Enter end date (31): ")
 
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
@@ -187,7 +187,7 @@ for city, test_centers in selected_test_centers.items():
             print_progress_bar(current_iterations, total_iterations)
 
             # Extract dates from active links and filter based on date range
-            available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) < end_date]
+            available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) <= end_date]
 
 
             # Print available_dates_inrange
