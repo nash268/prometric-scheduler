@@ -181,7 +181,7 @@ class CronJobs:
 
     def create_job(self, schedule, script_path, script_name):
         # Command to add the cron job
-        command = f'(echo "{schedule} cd {script_path} && python3 {script_name}") | crontab -'
+        command = f'(crontab -l; echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
         subprocess.run(command, shell=True)
 
 # create cron job
