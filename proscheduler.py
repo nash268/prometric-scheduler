@@ -70,7 +70,7 @@ except FileNotFoundError:
     if (operating_system == "Linux" or operating_system == "Darwin"):
         print("\033[33mWarning! This will delete all other cronjobs\033[0m")
 
-    schedule_task = input("Schedule script to automatically(yes/no): ")
+    schedule_task = input("Schedule script to run automatically(yes/no): ")
     if schedule_task == "yes":
         if (operating_system == "Linux" or operating_system == "Darwin"):
             print("")
