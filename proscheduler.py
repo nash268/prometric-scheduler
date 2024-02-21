@@ -1,5 +1,6 @@
 import os
 import platform
+import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -27,6 +28,11 @@ city_centers = {
                           
     "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
               }
+
+audio_file = "alert.mp3"
+schedule_task = ""
+operating_system = platform.system()
+
 
 print(prometric_logo)
 print("Welcome to the Test Center Availability Checker!")
@@ -61,6 +67,16 @@ except FileNotFoundError:
     start_date = input("Enter start date (1): ")
     end_date = input("Enter end date (31): ")
 
+    schedule_task = input("Schedule script to automatically(yes/no): ")
+    if schedule_task == "yes":
+        if (operating_system == "Linux" or operating_system == "Darwin"):
+            print("")
+            print("------------------------------------------------------------")
+            print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
+            print("for more info visit https://crontab.guru website")
+            print("------------------------------------------------------------")
+        schedule = input("how frequently you want to run script?: ")
+
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
         file.write(f"{exam_name},{month_year},{selected_city_indices},{start_date},{end_date}")
@@ -92,14 +108,6 @@ if len(selected_city_indices) < len(city_centers):
 print("checking...")
 
 
-audio_file = "alert.mp3"
-operating_system = platform.system()
-# invisible browser
-options = Options()
-options.add_argument("--headless=new")
-driver = webdriver.Chrome(options=options)
-
-
 # progress bar function
 total_iterations = len(selected_test_centers) * sum(len(test_centers) for test_centers in selected_test_centers.values())
 current_iterations = 0
@@ -111,6 +119,83 @@ def print_progress_bar(iteration, total, bar_length=50):
     print(f'\rProgress: [{bar}] {percent}% complete', end='', flush=True)
     print()
 
+
+# class for managing tasks on windows
+class WindowsTasks:
+    def __init__(self):
+        pass
+
+    def task_exists(self, task_name):
+        # Command to query existing tasks
+        query_command = f'schtasks /query /tn "{task_name}"'
+        
+        # Execute the command and capture the output
+        result = subprocess.run(query_command, shell=True, capture_output=True, text=True)
+        
+        # Check if the task name is found in the output
+        return task_name in result.stdout
+    
+    def delete_task(self, task_name):
+        # Command to delete the task
+        delete_command = f'schtasks /delete /tn "{task_name}" /f'
+        subprocess.run(delete_command, shell=True)
+
+    def create_task(self, task_name, schedule, script_path, script_name):
+        
+        # Command to schedule the task
+        command = f'Schtasks /create /sc minute /mo {schedule} /tn "{task_name}" /tr "cmd /c cd /d {script_path} && py {script_name}"'
+
+        # Execute the command to create the task
+        subprocess.run(command, shell=True)
+
+# create task using task scheduler on windows
+if operating_system == "Windows" and schedule_task == "yes":
+    # Initialize WindowsTasks object
+    tasks = WindowsTasks()
+
+    # Define task parameters
+    task_name = "prometric-scheduler"
+    script_path = os.getcwd()
+    script_name = "proscheduler.py"
+
+    # Check if the task already exists
+    if not tasks.task_exists(task_name):
+        # Task does not exist, create it
+        tasks.create_task(task_name, schedule, script_path, script_name)
+    else:
+        # Task does exist, Delete previvous Task and create New
+        tasks.delete_task(task_name)
+        tasks.create_task(task_name, schedule, script_path, script_name)
+
+
+class CronJobs:
+    def __init__(self):
+        pass
+
+    def delete_job(self):
+        # Command to remove the cron job
+        delete_command = f'crontab -r'
+        subprocess.run(delete_command, shell=True)
+
+    def create_job(self, schedule, script_path, script_name):
+        # Command to add the cron job
+        command = f'(echo "{schedule} cd {script_path} && python3 {script_name}") | crontab -'
+        subprocess.run(command, shell=True)
+
+# create cron job
+if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_task == "yes"):
+    script_path = os.getcwd()
+    script_name = "proscheduler.py"
+    cron = CronJobs()
+    cron.delete_job()
+    cron.create_job(schedule, script_path, script_name)
+
+
+
+# invisible browser
+options = Options()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
 
 for city, test_centers in selected_test_centers.items():
 
@@ -219,6 +304,7 @@ for city, test_centers in selected_test_centers.items():
 
 driver.close()
 
+# complete progress bar
 print_progress_bar(total_iterations, total_iterations)
 
 # Read LICENSE
