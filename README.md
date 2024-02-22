@@ -46,6 +46,9 @@ This project automates website interaction using Selenium WebDriver in Python an
 > [!IMPORTANT]
 > Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
 
+> [!CAUTION]
+> Script will remove all previous cronjobs on Linux & MacOs
+
 ### Linux and MacOs
 - For Linux and MacOS users, the script utilizes crontab for scheduling automatic runs. Visit [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to configure the timing.
 - once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run `crontab -r` command in terminal.
