@@ -187,9 +187,9 @@ class CronJobs:
             display_output = display_process.communicate()[0].decode().strip()
             display = display_output.splitlines()[0] if display_output else ""
             # command for setting up cronjob
-            command = f'(echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+            command = f'(crontab -l; echo "{schedule} export DISPLAY={display} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
         elif operating_system == "Darwin":
-            command = f'(echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+            command = f'(crontab -l; echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
             
         subprocess.run(command, shell=True)
 
