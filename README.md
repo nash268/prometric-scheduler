@@ -51,6 +51,9 @@ This project automates website interaction using Selenium WebDriver in Python an
 - once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run `crontab -r` command in terminal.
 ### Windows
 - on Windows, script utilizes Windows Task Scheduler. after running the script search task scheduler in start menu and see if the task is created.
+- Delete Task once you have found your dates.
+  
+![image](https://github.com/nash268/prometric-scheduler/assets/130772656/6a5ae47a-7c78-416a-a212-555d061ff3e8)
 
 
 
