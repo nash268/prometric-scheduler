@@ -182,8 +182,8 @@ class CronJobs:
     def create_job(self, operating_system, schedule, script_path, script_name):
         if operating_system == "Linux":
             # Find the display value using grep
-            command = "echo $DISPLAY | grep -oP ':\d+'"
-            display_process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+            display_command = "echo $DISPLAY | grep -oP ':\d+'"
+            display_process = subprocess.Popen(display_command, stdout=subprocess.PIPE, shell=True)
             display_output = display_process.communicate()[0].decode().strip()
             display = display_output.splitlines()[0] if display_output else ""
             # command for setting up cronjob
