@@ -30,6 +30,7 @@ city_centers = {
 
 audio_file = "alert.mp3"
 schedule_task = ""
+schedule = ""
 operating_system = platform.system()
 
 
@@ -69,15 +70,23 @@ except FileNotFoundError:
     if (operating_system == "Linux" or operating_system == "Darwin"):
         print("")
         print("\033[33mWarning! This will delete all other cronjobs\033[0m")
-        schedule_task = input("Schedule script to run automatically(yes/no): ")
-    
+        schedule_task = input("Schedule script to run automatically(yes/no): ")    
         if schedule_task == "yes":
             print("")
             print("------------------------------------------------------------")
-            print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
+            print("Input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
             print("\033[94mfor more info visit https://crontab.guru website\033[0m")
             print("------------------------------------------------------------")
             schedule = input("how frequently you want to run script?: ")
+
+    if (operating_system == "Windows"):
+        schedule_task = input("Schedule script to run automatically(yes/no): ")
+        if schedule_task == "yes":
+            print("")
+            print("------------------------------------------------------")
+            print("for example, To run script after every 30 minutes input 30")
+            schedule = input("Input number of minutes (30): ")
+
 
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
@@ -139,13 +148,13 @@ class WindowsTasks:
     
     def delete_task(self, task_name):
         # Command to delete the task
-        delete_command = f'schtasks /delete /tn "{task_name}" /f'
-        subprocess.run(delete_command, shell=True)
+        command = f'schtasks /delete /tn "{task_name}" /f'
+        subprocess.run(command, shell=True)
 
     def create_task(self, task_name, schedule, script_path, script_name):
         
         # Command to schedule the task
-        command = f'Schtasks /create /sc minute /mo {schedule} /tn "{task_name}" /tr "cmd /c cd /d {script_path} && py {script_name}"'
+        command = f'schtasks /create /sc minute /mo {schedule} /tn "{task_name}" /tr "cmd /c cd /d {script_path} && py {script_name}"'
 
         # Execute the command to create the task
         subprocess.run(command, shell=True)
