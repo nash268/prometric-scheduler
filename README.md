@@ -49,7 +49,7 @@ This project automates website interaction using Selenium WebDriver in Python an
 - on Windows, script utilizes Windows Task Scheduler. after running the script search task scheduler in start menu and see if the task is created.
 
 > [!IMPORTANT]
-> Do not change any file names in prometric-pcheduler folder for scheduling to work properly.
+> Do not change any file names in prometric-scheduler folder for scheduling to work properly.
 
 ## Support
 
