@@ -180,11 +180,15 @@ class CronJobs:
         subprocess.run(delete_command, shell=True)
 
     def create_job(self, operating_system, schedule, script_path, script_name):
-        # Find the display value
-        display = subprocess.check_output(["echo", "$DISPLAY"]).decode().strip()
+        if operating_system == "Linux":
+            # Find the display value
+            display = subprocess.check_output(["echo", "$DISPLAY"]).decode().strip()
+            # command for setting up cronjob
+            command = f'(echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
 
-        # command for setting up cronjob
-        command = f'(crontab -l; echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'            
+        elif operating_system == "Darwin":
+            command = f'(echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
+            
         subprocess.run(command, shell=True)
 
 # create cron job
