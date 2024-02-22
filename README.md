@@ -42,14 +42,17 @@ This project automates website interaction using Selenium WebDriver in Python an
 - The provided values are then saved in the `user_input.txt` file.
 - Subsequent runs of the script will automatically load values from the `user_input.txt` file.
 - To update the stored values, simply delete the `user_input.txt` file and rerun the script.
+
+> [!IMPORTANT]
+> Do not change any file names in prometric-scheduler folder for scheduling to work properly.
+
 ### Linux and MacOs
 - For Linux and MacOS users, the script utilizes crontab for scheduling automatic runs. Visit [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to configure the timing.
 - once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run `crontab -r` command in terminal.
 ### Windows
 - on Windows, script utilizes Windows Task Scheduler. after running the script search task scheduler in start menu and see if the task is created.
 
-> [!IMPORTANT]
-> Do not change any file names in prometric-scheduler folder for scheduling to work properly.
+
 
 ## Support
 
