@@ -71,13 +71,13 @@ except FileNotFoundError:
         print("\033[33mWarning! This will delete all other cronjobs\033[0m")
         schedule_task = input("Schedule script to run automatically(yes/no): ")
     
-    if schedule_task == "yes":
-        print("")
-        print("------------------------------------------------------------")
-        print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
-        print("\033[94mfor more info visit https://crontab.guru website\033[0m")
-        print("------------------------------------------------------------")
-        schedule = input("how frequently you want to run script?: ")
+        if schedule_task == "yes":
+            print("")
+            print("------------------------------------------------------------")
+            print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
+            print("\033[94mfor more info visit https://crontab.guru website\033[0m")
+            print("------------------------------------------------------------")
+            schedule = input("how frequently you want to run script?: ")
 
     # Write input values to file for later use
     with open("user_input.txt", "w") as file:
