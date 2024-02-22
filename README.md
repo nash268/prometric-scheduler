@@ -44,7 +44,7 @@ This project automates website interaction using Selenium WebDriver in Python an
 - To update the stored values, simply delete the `user_input.txt` file and rerun the script.
 
 > [!IMPORTANT]
-> Do not change any file names in prometric-scheduler folder for scheduling to work properly.
+> Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
 
 ### Linux and MacOs
 - For Linux and MacOS users, the script utilizes crontab for scheduling automatic runs. Visit [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to configure the timing.
