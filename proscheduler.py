@@ -75,7 +75,7 @@ except FileNotFoundError:
         print("")
         print("------------------------------------------------------------")
         print("input crontab entry. e.g (*/30 * * * *) will run script every 30 minutes")
-        print("for more info visit https://crontab.guru website")
+        print("\033[94mfor more info visit https://crontab.guru website\033[0m")
         print("------------------------------------------------------------")
         schedule = input("how frequently you want to run script?: ")
 
