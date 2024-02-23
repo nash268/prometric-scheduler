@@ -35,7 +35,8 @@ This project automates website interaction using Selenium WebDriver in Python an
   py proscheduler.py
   ```
   
-- [running script.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/25eea251-1395-48bb-b81d-21e6ffa3bc6b)
+- [running script on linux.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/1ea57bf2-bd16-477c-91b0-93b5549af06f)
+
 
 
 - When running the script for the first time, it will prompt you with a few relevant questions.
