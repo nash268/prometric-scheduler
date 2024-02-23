@@ -55,8 +55,8 @@ This project automates website interaction on Prometric website, checks for avai
 ### Windows
 - on Windows, script utilizes Windows Task Scheduler. after running the script, search task scheduler in start menu and see if the task is created.
 - Delete Task once you have found your dates.
-  
-![image](https://github.com/nash268/prometric-scheduler/assets/130772656/6a5ae47a-7c78-416a-a212-555d061ff3e8)
+  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/ab513513-5a8f-4147-85ca-6f91b42f9fe5)
+
 
 
 
