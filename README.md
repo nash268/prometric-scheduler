@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project automates website interaction on Prometric website, checks for available seats and alerts the user once seats are found.
+This project automates website interaction on Prometric website, checks for available dates and alerts the user once seats are found.
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
