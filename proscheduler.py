@@ -237,6 +237,7 @@ class CronJobs:
             command = f'(echo "{schedule} cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
             
         subprocess.run(command, shell=True)
+        print("SUCCESS: Cronjob created successfully.")
 
 # create cron job
 if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_task == "yes"):
