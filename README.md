@@ -1,10 +1,9 @@
 # prometric-scheduler
 
-# Automated Website Interaction with Selenium
 
 ## Overview
 
-This project automates website interaction using Selenium WebDriver in Python and check for availability.
+This project automates website interaction on Prometric website, checks for available seats and alerts the user once seats are found.
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
