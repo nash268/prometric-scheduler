@@ -330,8 +330,9 @@ for city, test_centers in selected_test_centers.items():
 
 
             # Print available_dates_inrange
-            print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
-            print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
+            if any(available_dates_inrange):
+                print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
+                print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
 
             # opening file in different operating systems
             os_to_command = {
