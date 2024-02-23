@@ -4,6 +4,8 @@
 ## Overview
 
 This project automates website interaction on Prometric website, checks for available dates and alerts the user once seats are found.
+> [!NOTE]
+> Currently it only checks Pakistani test centers
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
