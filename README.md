@@ -46,7 +46,7 @@ This project automates website interaction on Prometric website, checks for avai
 > [!NOTE]
 > To update the stored values, simply delete the `user_input.txt` file and rerun the script.
 
-> [!IMPORTANT]
+> [!TIP]
 > Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
 
 > [!CAUTION]
