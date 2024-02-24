@@ -1,5 +1,6 @@
 import os
 import platform
+import argparse
 import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -79,6 +80,15 @@ def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None):
                     print(template.format(expected))
         else:
             return ui
+
+# creating optional argument -e
+parser = argparse.ArgumentParser()
+parser.add_argument('-e', action='store_true', help='Edit user_input.txt file')
+args = parser.parse_args()
+# If -e flag is provided, delete the file
+if args.e:
+    if os.path.exists("user_input.txt"):
+        os.remove("user_input.txt")
 
 
 # Check if it's the first time running the script
