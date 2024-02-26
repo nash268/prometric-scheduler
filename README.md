@@ -37,7 +37,11 @@ This project automates website interaction on Prometric website, checks for avai
   py proscheduler.py
   ```
   
-- [running script on linux.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/1ea57bf2-bd16-477c-91b0-93b5549af06f)
+- [running script on linux](https://github.com/nash268/prometric-scheduler/assets/130772656/68b5cdf8-58e7-4f98-80d4-ff1a2284c632)
+
+
+
+
 
 
 - When running the script for the first time, it will prompt you with a few relevant questions.
