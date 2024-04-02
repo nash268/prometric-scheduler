@@ -150,21 +150,16 @@ exam_name = exam_name.upper()
 start_date = int(start_date)
 end_date = int(end_date)
 
-# Validate user input for city selection
-for index in selected_city_indices:
-    if index < 1 or index > len(city_centers):
-        print("Invalid selection. Please enter numbers within the range.")
-        exit()
 
 
-# Gather selected test centers based on user input
-selected_test_centers = {city: centers for city, centers in city_centers.items()}
+
 
 # If not all centers are selected, filter selected_test_centers based on user input
 if len(selected_city_indices) < len(city_centers):
     selected_cities = [list(city_centers.keys())[index - 1] for index in selected_city_indices]
-    selected_test_centers = {city: centers for city, centers in selected_test_centers.items() if city in selected_cities}
-
+    selected_test_centers = {city: centers for city, centers in city_centers.items() if city in selected_cities}
+else:
+    selected_test_centers = city_centers
 
 # Now you can proceed with checking availability for the selected test centers
 print("checking...")
