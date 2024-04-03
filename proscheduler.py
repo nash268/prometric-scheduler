@@ -54,7 +54,7 @@ print("------------------------------------------------")
 # usage examples of sanitised_input():
 # age = sanitised_input("Enter your age: ", int, 1, 101)
 # answer = sanitised_input("Enter your answer: ", str.lower, range_=('a', 'b', 'c', 'd'))
-def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None):
+def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None, subsetof_=None):
     if min_ is not None and max_ is not None and max_ < min_:
         raise ValueError("min_ must be less than or equal to max_.")
     while True:
@@ -83,6 +83,8 @@ def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None):
                         str(range_[-1])
                     ))
                     print(template.format(expected))
+        elif (subsetof_ is not None) and (not(set(ui.split(' '))) <= set(subsetof_)):
+            print(f"Input must be a subset of {subsetof_}")
         else:
             return ui
 
@@ -113,7 +115,7 @@ except FileNotFoundError:
         print(f"{index}. {city}")
 
     # input for cities
-    selected_city_indices = sanitised_input("Enter the numbers corresponding to the cities you want to check (separated by space): ", str, range_=('1', '2', '1 2')) or '1 2'
+    selected_city_indices = sanitised_input("Enter the numbers corresponding to the cities you want to check (separated by space): ", str, subsetof_=(tuple(str(n) for n in range(1, len(city_centers)+1))))
 
     start_date = sanitised_input("Enter start date (1): ", int, 1, 31)
     end_date = sanitised_input("Enter end date (31): ", int, 1, 31)
