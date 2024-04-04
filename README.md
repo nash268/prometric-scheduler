@@ -1,5 +1,6 @@
 # prometric-scheduler
-![image](https://github.com/nash268/prometric-scheduler/assets/130772656/946ef3d1-c194-4d61-9472-5b7ddb338591)
+![Screenshot 2024-04-04 12 35 44 PM](https://github.com/nash268/prometric-scheduler/assets/130772656/ddbcfd49-4a30-40bf-a6c2-42e85279884b)
+
 
 
 
