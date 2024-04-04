@@ -1,4 +1,6 @@
 import os
+import re
+import json
 import platform
 import argparse
 import subprocess
@@ -88,15 +90,50 @@ def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None, subse
         else:
             return ui
 
-# creating optional argument -e
+
 parser = argparse.ArgumentParser()
+# creating optional argument -e
 parser.add_argument('-e', action='store_true', help='Edit user_input.txt file')
+# create -c argument
+parser.add_argument('-c', action='store_true', help='Stores custom entry for center in custom_centers.txt')
 args = parser.parse_args()
+
 # If -e flag is provided, delete the file
 if args.e:
     if os.path.exists("user_input.txt"):
         os.remove("user_input.txt")
 
+# If -c flag is provided, create a json file for storing custom centers
+if args.c:
+    custom_center = input("copy paste the element of center from browser: ")
+    location_pattern = r'title="Availability - \d+:(.+?)#'
+    xpath_pattern = r'<a\s+[^>]*title="([^"]+)"[^>]*>'
+    location_match = re.search(location_pattern, custom_center)
+    xpath_match = re.search(xpath_pattern, custom_center)
+    if location_match and xpath_match:
+        location = ' '.join(word.capitalize() for word in location_match.group(1).split())
+        xpath = f'//a[@title="{xpath_match.group(1)}"]'
+
+        # update centers in file with new data and store them in json file
+        city_centers = {}
+        new_centers = {location: [xpath]}
+        if os.path.exists("custom_centers.txt"):
+            with open("custom_centers.txt", "r") as file:
+                city_centers = json.load(file)
+        city_centers.update(new_centers)
+        with open("custom_centers.txt", "w") as file:
+            json.dump(city_centers, file)
+            print("SUCCESS: custom file created.")
+            exit()
+    else:
+        print("Title not found in html element!")
+        exit()
+
+
+# check if custom_centers.txt exist and load centers from that file
+if os.path.exists("custom_centers.txt"):
+    with open("custom_centers.txt", "r") as file:
+        city_centers = json.load(file)
 
 # Check if it's the first time running the script
 try:
