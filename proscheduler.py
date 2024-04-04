@@ -123,7 +123,7 @@ if args.c:
         city_centers.update(new_centers)
         with open("custom_centers.txt", "w") as file:
             json.dump(city_centers, file)
-            print("SUCCESS: custom file created.")
+            print("SUCCESS: custom_centers.txt file created.")
             exit()
     else:
         print("FAULTY REGEX:Can't extract Xpath or Location from Element.")
