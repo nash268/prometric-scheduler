@@ -106,12 +106,12 @@ if args.e:
 # If -c flag is provided, create a json file for storing custom centers
 if args.c:
     custom_center = input("copy paste the element of center from browser: ")
-    location_pattern = r'title="Availability - \d+:(.+?)#'
+    location_pattern = r'title="Availability - \d+:(.+?)(?=[#"])'
     xpath_pattern = r'<a\s+[^>]*title="([^"]+)"[^>]*>'
     location_match = re.search(location_pattern, custom_center)
     xpath_match = re.search(xpath_pattern, custom_center)
     if location_match and xpath_match:
-        location = ' '.join(word.capitalize() for word in location_match.group(1).split())
+        location = re.sub(r'\d+\s?', '', ' '.join(word.capitalize() for word in location_match.group(1).split()))
         xpath = f'//a[@title="{xpath_match.group(1)}"]'
 
         # update centers in file with new data and store them in json file
@@ -126,7 +126,7 @@ if args.c:
             print("SUCCESS: custom file created.")
             exit()
     else:
-        print("Title not found in html element!")
+        print("FAULTY REGEX:Can't extract Xpath or Location from Element.")
         exit()
 
 
