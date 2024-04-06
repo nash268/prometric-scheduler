@@ -8,10 +8,8 @@
 
 This project automates website interaction on Prometric website, checks for available dates and alerts the user once seats are found.
 > [!NOTE]
-> It checks for Pakistani centers by default. To add other centers, run script with "-c" argument
->```
-> python3 proscheduler.py -c
->```
+> It checks for Pakistani centers by default. To add other centers
+> see section "[Adding centers for differenct country](#adding-centers-for-differenct-country)"
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
@@ -58,6 +56,10 @@ This project automates website interaction on Prometric website, checks for avai
 > ```
 > python3 proscheduler.py -e
 > ```
+
+### Adding centers for differenct country
+[Screen recording 2024-04-06 6.25.01 PM.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/fca7c0f2-a02f-4d2b-bf44-9e6a4cd9934c)
+
 
 > [!TIP]
 > Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
