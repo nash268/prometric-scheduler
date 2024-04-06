@@ -58,6 +58,12 @@ This project automates website interaction on Prometric website, checks for avai
 > ```
 
 ### Adding centers for different country
+- run script with "-c" argument to add other centers
+```
+python3 proscheduler.py -c
+```
+- this will create a `custom_centers.txt` file in same directory, and store centers
+
 [Screen recording 2024-04-06 6.25.01 PM.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/fca7c0f2-a02f-4d2b-bf44-9e6a4cd9934c)
 
 
