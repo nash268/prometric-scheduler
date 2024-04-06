@@ -1,4 +1,6 @@
 import os
+import re
+import json
 import platform
 import argparse
 import subprocess
@@ -54,7 +56,7 @@ print("------------------------------------------------")
 # usage examples of sanitised_input():
 # age = sanitised_input("Enter your age: ", int, 1, 101)
 # answer = sanitised_input("Enter your answer: ", str.lower, range_=('a', 'b', 'c', 'd'))
-def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None):
+def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None, subsetof_=None):
     if min_ is not None and max_ is not None and max_ < min_:
         raise ValueError("min_ must be less than or equal to max_.")
     while True:
@@ -83,18 +85,55 @@ def sanitised_input(prompt, type_=None, min_=None, max_=None, range_=None):
                         str(range_[-1])
                     ))
                     print(template.format(expected))
+        elif (subsetof_ is not None) and (not(set(ui.split(' '))) <= set(subsetof_)):
+            print(f"Input must be a subset of {subsetof_}")
         else:
             return ui
 
-# creating optional argument -e
+
 parser = argparse.ArgumentParser()
+# creating optional argument -e
 parser.add_argument('-e', action='store_true', help='Edit user_input.txt file')
+# create -c argument
+parser.add_argument('-c', action='store_true', help='Stores custom entry for center in custom_centers.txt')
 args = parser.parse_args()
+
 # If -e flag is provided, delete the file
 if args.e:
     if os.path.exists("user_input.txt"):
         os.remove("user_input.txt")
 
+# If -c flag is provided, create a json file for storing custom centers
+if args.c:
+    custom_center = input("copy paste the element of center from browser: ")
+    location_pattern = r'title="Availability - \d+:(.+?)(?=[#"])'
+    xpath_pattern = r'<a\s+[^>]*title="([^"]+)"[^>]*>'
+    location_match = re.search(location_pattern, custom_center)
+    xpath_match = re.search(xpath_pattern, custom_center)
+    if location_match and xpath_match:
+        location = re.sub(r'\d+\s?', '', ' '.join(word.capitalize() for word in location_match.group(1).split()))
+        xpath = f'//a[@title="{xpath_match.group(1)}"]'
+
+        # update centers in file with new data and store them in json file
+        city_centers = {}
+        new_centers = {location: [xpath]}
+        if os.path.exists("custom_centers.txt"):
+            with open("custom_centers.txt", "r") as file:
+                city_centers = json.load(file)
+        city_centers.update(new_centers)
+        with open("custom_centers.txt", "w") as file:
+            json.dump(city_centers, file)
+            print("SUCCESS: custom_centers.txt file created.")
+            exit()
+    else:
+        print("FAULTY REGEX:Can't extract Xpath or Location from Element.")
+        exit()
+
+
+# check if custom_centers.txt exist and load centers from that file
+if os.path.exists("custom_centers.txt"):
+    with open("custom_centers.txt", "r") as file:
+        city_centers = json.load(file)
 
 # Check if it's the first time running the script
 try:
@@ -113,7 +152,7 @@ except FileNotFoundError:
         print(f"{index}. {city}")
 
     # input for cities
-    selected_city_indices = sanitised_input("Enter the numbers corresponding to the cities you want to check (separated by space): ", str, range_=('1', '2', '1 2')) or '1 2'
+    selected_city_indices = sanitised_input("Enter the numbers corresponding to the cities you want to check (separated by space): ", str, subsetof_=(tuple(str(n) for n in range(1, len(city_centers)+1))))
 
     start_date = sanitised_input("Enter start date (1): ", int, 1, 31)
     end_date = sanitised_input("Enter end date (31): ", int, 1, 31)
@@ -150,21 +189,16 @@ exam_name = exam_name.upper()
 start_date = int(start_date)
 end_date = int(end_date)
 
-# Validate user input for city selection
-for index in selected_city_indices:
-    if index < 1 or index > len(city_centers):
-        print("Invalid selection. Please enter numbers within the range.")
-        exit()
 
 
-# Gather selected test centers based on user input
-selected_test_centers = {city: centers for city, centers in city_centers.items()}
+
 
 # If not all centers are selected, filter selected_test_centers based on user input
 if len(selected_city_indices) < len(city_centers):
     selected_cities = [list(city_centers.keys())[index - 1] for index in selected_city_indices]
-    selected_test_centers = {city: centers for city, centers in selected_test_centers.items() if city in selected_cities}
-
+    selected_test_centers = {city: centers for city, centers in city_centers.items() if city in selected_cities}
+else:
+    selected_test_centers = city_centers
 
 # Now you can proceed with checking availability for the selected test centers
 print("checking...")

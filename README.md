@@ -1,12 +1,17 @@
 # prometric-scheduler
-![image](https://github.com/nash268/prometric-scheduler/assets/130772656/245c937e-7082-454c-a23b-f0ebb0dcbf6b)
+![Screenshot 2024-04-04 12 35 44 PM](https://github.com/nash268/prometric-scheduler/assets/130772656/ddbcfd49-4a30-40bf-a6c2-42e85279884b)
+
+
 
 
 ## Overview
 
 This project automates website interaction on Prometric website, checks for available dates and alerts the user once seats are found.
 > [!NOTE]
-> Currently it only checks Pakistani test centers
+> It checks for Pakistani centers by default. To add other centers, run script with "-c" argument
+>```
+> python3 proscheduler.py -c
+>```
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
@@ -49,6 +54,10 @@ This project automates website interaction on Prometric website, checks for avai
 - Subsequent runs of the script will automatically load values from the `user_input.txt` file.
 > [!NOTE]
 > To update the stored values, simply delete the `user_input.txt` file and rerun the script.
+> OR run script with "-e" argument
+> ```
+> python3 proscheduler.py -e
+> ```
 
 > [!TIP]
 > Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
