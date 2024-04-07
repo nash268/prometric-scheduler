@@ -106,7 +106,7 @@ if args.e:
 # If -c flag is provided, create a json file for storing custom centers
 if args.c:
     custom_center = input("copy paste the element of center from browser: ")
-    location_pattern = r'title="Availability - \d+:(.+?)(?=[#"])'
+    location_pattern = r'title="Availability - \d+:(.+?)[#"]'
     xpath_pattern = r'<a\s+[^>]*title="([^"]+)"[^>]*>'
     location_match = re.search(location_pattern, custom_center)
     xpath_match = re.search(xpath_pattern, custom_center)
