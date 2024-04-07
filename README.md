@@ -88,6 +88,11 @@ python3 proscheduler.py -c
 
 For any issues or questions, feel free to [create an issue](https://github.com/nash268/prometric-scheduler/issues).
 
+## Donate
+
+![1712505295945](https://github.com/nash268/prometric-scheduler/assets/130772656/e5877a2f-58e7-4fa9-bc78-2fd2ea8b0bdd)
+
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
