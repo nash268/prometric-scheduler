@@ -200,8 +200,7 @@ if len(selected_city_indices) < len(city_centers):
 else:
     selected_test_centers = city_centers
 
-# Now you can proceed with checking availability for the selected test centers
-print("checking...")
+
 
 
 # progress bar function
@@ -300,7 +299,11 @@ if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_t
 
 
 # loading webdriver for chrome
+print("Loading webdriver for chrome...")
 driver = webdriver.Chrome()
+
+# Now you can proceed with checking availability for the selected test centers
+print("checking...")
 
 for city, test_centers in selected_test_centers.items():
 
