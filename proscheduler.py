@@ -136,12 +136,12 @@ if os.path.exists("custom_centers.txt"):
         city_centers = json.load(file)
 
 # Check if it's the first time running the script
-if os.path.exists("user_input.txt"):
+try:
     with open("user_input.txt", "r") as file:
         # If file exists, read values from it
         exam_name, month_year, selected_city_indices, start_date, end_date= file.read().split(',')
         print("Values loaded from previous session file user_input.txt.")
-else:
+except FileNotFoundError:
     # If file doesn't exist, prompt user for input
     exam_name = sanitised_input("Enter exam name (STEP1/STEP2): ", str.upper, range_=('STEP1', 'STEP2'))
     month_year = sanitised_input("Enter month and year (3 2024): ", str)
