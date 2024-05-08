@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 prometric_logo = """
 
@@ -300,7 +301,9 @@ if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_t
 
 # loading webdriver for chrome
 print("Loading webdriver for chrome...")
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--window-position=-2000,0")
+driver = webdriver.Chrome(options=chrome_options)
 driver.minimize_window()
 
 # Now you can proceed with checking availability for the selected test centers
