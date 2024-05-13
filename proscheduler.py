@@ -277,7 +277,7 @@ class CronJobs:
         if operating_system == "Linux":
             # for Linux, the DISPLAY environment variable is used for GUI applications.
             # Find the display value
-            display = subprocess.check_output(["echo", "$DISPLAY"]).decode().strip()
+            display = os.environ.get("DISPLAY")
             # command for setting up cronjob
             command = f'(echo "{schedule} export DISPLAY={display}; cd {script_path} && python3 {script_name} >> {script_path}/logfile 2>&1") | crontab -'
 
