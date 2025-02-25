@@ -335,6 +335,21 @@ for city, test_centers in selected_test_centers.items():
         )
         initial_link.click()
 
+        # Appointment selection
+        appointment_selection = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "masterPage_cphPageBody_ddlExam"))
+        )
+
+        if (exam_name == "STEP1"):
+            appointment_selection_value = "STEP1 STEP1"
+        elif (exam_name == "STEP2"):
+            appointment_selection_value = "STEP2 STEP2"
+        elif (exam_name == "STEP3"):
+            appointment_selection_value = "STEP3 STEP3"
+            
+        Select(appointment_selection).select_by_value(appointment_selection_value)
+        driver.find_element(By.ID, "masterPage_cphPageBody_btnNext").click()
+
 
         # wait for page to load
         # Find the search input element and enter city "Lahore, Pakistan"
