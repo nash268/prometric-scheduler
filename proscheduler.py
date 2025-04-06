@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 
-prometric_logo = """
+prometric_logo = r"""
 
  ____                           _        _      
 |  _ \ _ __ ___  _ __ ___   ___| |_ _ __(_) ___ 
