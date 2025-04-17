@@ -357,7 +357,7 @@ for city, test_centers in selected_test_centers.items():
             EC.visibility_of_element_located((By.ID, "txtSearch"))
         )
         # change city
-        search_input.send_keys(city)
+        search_input.send_keys(city_name)
 
 
         # Find the search button and click it
