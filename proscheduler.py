@@ -7,6 +7,7 @@ import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
@@ -296,11 +297,16 @@ if (operating_system == "Linux" or operating_system == "Darwin") and (schedule_t
     cron.create_job(operating_system, schedule, script_path, script_name)
 
 
-
+# Set up Chrome options
+options = Options()
+options.add_argument("--headless")  # Headless mode
+options.add_argument("--disable-gpu")  # Optional but recommended
+options.add_argument("--window-size=1920,1080")  # Optional for consistent rendering
+options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 # loading webdriver for chrome
 print("Loading webdriver for chrome...")
-driver = webdriver.Chrome()
-driver.minimize_window()
+print("Please wait...")
+driver = webdriver.Chrome(options=options)
 
 # Now you can proceed with checking availability for the selected test centers
 print("checking...")
@@ -410,7 +416,10 @@ for city, test_centers in selected_test_centers.items():
             # play audio if dates within range found
             if any(available_dates_inrange):
                 if operating_system in os_to_command:
-                    os_to_command[operating_system](audio_file)
+                    try: 
+                        os_to_command[operating_system](audio_file)
+                    except Exception as e:
+                        print("error play audio:", e)
                 else:
                     print("unsupported operating system/ media player to play audio!")
 
