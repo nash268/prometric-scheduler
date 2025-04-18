@@ -29,9 +29,8 @@ prometric_logo = r"""
 
 country = "PAK"
 city_centers = {
-    "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']",
-                          "//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"],
-                          
+    "Lahore, Pakistan": ["//a[@title='Availability - 8783:LAHORE, PAKISTAN#8783']"],
+    "Islamabad, Pakistan": ["//a[@title='Availability - 8782:ISLAMABAD, PAKISTAN #8782']"],                      
     "Karachi, Pakistan": ["//a[@title='Availability - 8781:KARACHI, PAKISTAN #8781']"]
               }
 
@@ -309,9 +308,6 @@ print("checking...")
 for city, test_centers in selected_test_centers.items():
 
     for center in test_centers:
-        # extract city_name from center for later use with print statement
-        city_name = center.split(":")[1].split(",")[0].strip()
-
         # Open the desired URL
         driver.get("https://securereg3.prometric.com/Welcome.aspx")
 
@@ -401,7 +397,7 @@ for city, test_centers in selected_test_centers.items():
 
             # Print available_dates_inrange
             if any(available_dates_inrange):
-                print(f"for {city_name} in {month_year} from {start_date} to {end_date}: ")
+                print(f"for {city} in {month_year} from {start_date} to {end_date}: ")
                 print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
 
             # opening file in different operating systems
@@ -423,7 +419,7 @@ for city, test_centers in selected_test_centers.items():
             # update print_progress_bar at end of 2nd loop
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
-            print(f'\033[91mNo seats found for {city_name} in {month_year} from {start_date} to {end_date}.\033[0m')
+            print(f'\033[91mNo seats found for {city} in {month_year} from {start_date} to {end_date}.\033[0m')
             continue
 
 
