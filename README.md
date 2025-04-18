@@ -2,7 +2,7 @@
 ![Screenshot 2024-04-04 12 35 44 PM](https://github.com/nash268/prometric-scheduler/assets/130772656/ddbcfd49-4a30-40bf-a6c2-42e85279884b)
 
 
-
+## [Watch Tutorial Video on Youtube](https://youtu.be/3JTJTnPMorY?si=uihAMKIiucfjl9nV)
 
 ## Overview
 
