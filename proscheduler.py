@@ -53,6 +53,29 @@ print("Let's get started!")
 print("------------------------------------------------")
 
 
+def notify(title, message):
+    if operating_system == "Darwin":
+        subprocess.run([
+            "osascript", "-e",
+            f'display notification "{message}" with title "{title}"'
+        ])
+    elif operating_system == "Linux":
+        subprocess.run(['notify-send', title, message])
+    elif operating_system == "Windows":
+        title = title.replace('"', '`"')
+        message = message.replace('"', '`"')
+        powershell_cmd = f'''
+        [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null;
+        $template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02);
+        $template.GetElementsByTagName("text")[0].AppendChild($template.CreateTextNode("{title}")) > $null;
+        $template.GetElementsByTagName("text")[1].AppendChild($template.CreateTextNode("{message}")) > $null;
+        $toast = [Windows.UI.Notifications.ToastNotification]::new($template);
+        $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Python Script");
+        $notifier.Show($toast);
+        '''
+        subprocess.run(["powershell", "-Command", powershell_cmd], shell=True)
+
+
 # usage examples of sanitised_input():
 # age = sanitised_input("Enter your age: ", int, 1, 101)
 # answer = sanitised_input("Enter your answer: ", str.lower, range_=('a', 'b', 'c', 'd'))
@@ -405,6 +428,7 @@ for city, test_centers in selected_test_centers.items():
             if any(available_dates_inrange):
                 print(f"for {city} in {month_year} from {start_date} to {end_date}: ")
                 print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
+                notify(f"Prometric - {city}", f"dates found: {available_dates_inrange}")
 
             # opening file in different operating systems
             os_to_command = {
@@ -421,7 +445,7 @@ for city, test_centers in selected_test_centers.items():
                     except Exception as e:
                         print("error play audio:", e)
                 else:
-                    print("unsupported operating system/ media player to play audio!")
+                    print("unsupported operating system media player to play audio!")
 
         # If no active links are found, print a message            
         except TimeoutException:
@@ -429,6 +453,7 @@ for city, test_centers in selected_test_centers.items():
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
             print(f'\033[91mNo seats found for {city} in {month_year} from {start_date} to {end_date}.\033[0m')
+            notify(f"Prometric - {city}", f"No seats found in {month_year} from {start_date} to {end_date}")
             continue
 
 
