@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import html
 import platform
 import argparse
 import subprocess
@@ -54,6 +55,8 @@ print("------------------------------------------------")
 
 
 def notify(title, message):
+    title = html.escape(title)
+    message = html.escape(message)
     if operating_system == "Darwin":
         subprocess.run([
             "osascript", "-e",
@@ -62,7 +65,16 @@ def notify(title, message):
     elif operating_system == "Linux":
         subprocess.run(['notify-send', title, message])
     elif operating_system == "Windows":
-        powershell_cmd = f'[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null; $t=[Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02); $t.GetElementsByTagName("text")[0].AppendChild($t.CreateTextNode("{title}")) > $null; $t.GetElementsByTagName("text")[1].AppendChild($t.CreateTextNode("{message}")) > $null; $toast=[Windows.UI.Notifications.ToastNotification]::new($t); [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Prometric Scheduler").Show($toast);'
+        powershell_cmd = (
+            "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null; "
+            "$t=[Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02); "
+            "$textNodes = $t.GetElementsByTagName('text'); "
+            f"$textNodes.Item(0).AppendChild($t.CreateTextNode('{title}')) > $null; "
+            f"$textNodes.Item(1).AppendChild($t.CreateTextNode('{message}')) > $null; "
+            "$toast=[Windows.UI.Notifications.ToastNotification]::new($t); "
+            '[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Prometric Scheduler").Show($toast);'
+        )
+
         subprocess.run(["powershell", "-NoProfile", "-Command", powershell_cmd], shell=True)
 
 
@@ -443,7 +455,7 @@ for city, test_centers in selected_test_centers.items():
             current_iterations += 1
             print_progress_bar(current_iterations, total_iterations)
             print(f'\033[91mNo seats found for {city} in {month_year} from {start_date} to {end_date}.\033[0m')
-            notify(f"Prometric - {city}", f"No seats found in {month_year} from {start_date} to {end_date}")
+            # notify(f"Prometric - {city}", f"No seats found in {month_year} from {start_date} to {end_date}")
             continue
 
 
