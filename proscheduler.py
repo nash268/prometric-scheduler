@@ -430,7 +430,7 @@ for city, test_centers in selected_test_centers.items():
             if any(available_dates_inrange):
                 print(f"for {city} in {month_year} from {start_date} to {end_date}: ")
                 print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
-                notify(f"Prometric - {city}", f"dates found: {available_dates_inrange}")
+                notify(f"Prometric - {city}", f"dates found: {available_dates_inrange} in {month_year}")
 
             # opening file in different operating systems
             os_to_command = {
