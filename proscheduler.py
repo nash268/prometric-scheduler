@@ -62,18 +62,8 @@ def notify(title, message):
     elif operating_system == "Linux":
         subprocess.run(['notify-send', title, message])
     elif operating_system == "Windows":
-        title = title.replace('"', '`"')
-        message = message.replace('"', '`"')
-        powershell_cmd = f'''
-        [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null;
-        $template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02);
-        $template.GetElementsByTagName("text")[0].AppendChild($template.CreateTextNode("{title}")) > $null;
-        $template.GetElementsByTagName("text")[1].AppendChild($template.CreateTextNode("{message}")) > $null;
-        $toast = [Windows.UI.Notifications.ToastNotification]::new($template);
-        $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Python Script");
-        $notifier.Show($toast);
-        '''
-        subprocess.run(["powershell", "-Command", powershell_cmd], shell=True)
+        powershell_cmd = f'[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null; $t=[Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02); $t.GetElementsByTagName("text")[0].AppendChild($t.CreateTextNode("{title}")) > $null; $t.GetElementsByTagName("text")[1].AppendChild($t.CreateTextNode("{message}")) > $null; $toast=[Windows.UI.Notifications.ToastNotification]::new($t); [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Python Script").Show($toast);'
+        subprocess.run(["powershell", "-NoProfile", "-Command", powershell_cmd], shell=True)
 
 
 # usage examples of sanitised_input():
