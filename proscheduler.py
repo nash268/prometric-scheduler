@@ -5,6 +5,7 @@ import html
 import platform
 import argparse
 import subprocess
+from playsound import playsound
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -228,16 +229,7 @@ else:
 
 
 
-# progress bar function
-total_iterations = len(selected_test_centers) * sum(len(test_centers) for test_centers in selected_test_centers.values())
-current_iterations = 0
-def print_progress_bar(iteration, total, bar_length=50):
-    percent = "{0:.1f}".format(100 * (iteration / float(total)))
-    filled_length = int(bar_length * iteration // total)
-    bar = '=' * filled_length + '-' * (bar_length - filled_length)
-    print()
-    print(f'\rProgress: [{bar}] {percent}% complete', end='', flush=True)
-    print()
+
 
 
 # class for managing tasks on windows
@@ -330,7 +322,8 @@ options.add_argument("--window-size=1920,1080")  # Optional for consistent rende
 options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 # loading webdriver for chrome
 print("Loading webdriver for chrome...")
-print("Please wait...")
+print("\033[33mThis will take a while, if this is first time.\033[0m")
+print("\033[33mPlease wait...\033[0m")
 driver = webdriver.Chrome(options=options)
 
 # Now you can proceed with checking availability for the selected test centers
@@ -341,6 +334,7 @@ for city, test_centers in selected_test_centers.items():
     for center in test_centers:
         # Open the desired URL
         driver.get("https://securereg3.prometric.com/Welcome.aspx")
+        print("prometric website loaded...")
 
         # select exam_name in drop down menu
         programs_menu = driver.find_element(By.ID, "masterPage_cphPageBody_ddlPrograms")
@@ -390,6 +384,7 @@ for city, test_centers in selected_test_centers.items():
         # Find the search button and click it
         search_button = driver.find_element(By.ID, "btnSearch")
         search_button.click()
+        print("searching...")
 
         # selecting center
         availability_link = WebDriverWait(driver, 10).until(
@@ -418,9 +413,6 @@ for city, test_centers in selected_test_centers.items():
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "calActiveLink"))
             )
 
-            # update print_progress_bar at end of 2nd loop
-            current_iterations += 1
-            print_progress_bar(current_iterations, total_iterations)
 
             # Extract dates from active links and filter based on date range
             available_dates_inrange = [int(link.text) for link in active_links if start_date <= int(link.text) <= end_date]
@@ -431,37 +423,16 @@ for city, test_centers in selected_test_centers.items():
                 print(f"for {city} in {month_year} from {start_date} to {end_date}: ")
                 print(f'\033[92mdates found: {available_dates_inrange} \033[0m')
                 notify(f"Prometric - {city}", f"dates found: {available_dates_inrange} in {month_year}")
+                playsound(audio_file, block=True)
 
-            # opening file in different operating systems
-            os_to_command = {
-                "Windows": lambda file: os.startfile(file),
-                "Darwin": lambda file: os.system(f"open {file}"),
-                "Linux": lambda file: os.system(f"xdg-open {file}")
-                }
-
-            # play audio if dates within range found
-            if any(available_dates_inrange):
-                if operating_system in os_to_command:
-                    try: 
-                        os_to_command[operating_system](audio_file)
-                    except Exception as e:
-                        print("error play audio:", e)
-                else:
-                    print("unsupported operating system media player to play audio!")
 
         # If no active links are found, print a message            
         except TimeoutException:
-            # update print_progress_bar at end of 2nd loop
-            current_iterations += 1
-            print_progress_bar(current_iterations, total_iterations)
             print(f'\033[91mNo seats found for {city} in {month_year} from {start_date} to {end_date}.\033[0m')
             # notify(f"Prometric - {city}", f"No seats found in {month_year} from {start_date} to {end_date}")
             continue
 
 
 driver.close()
-
-# complete progress bar
-print_progress_bar(total_iterations, total_iterations)
-
+print("\033[32mTask complete! Closing chromedriver!\033[0m")
 # Read LICENSE
