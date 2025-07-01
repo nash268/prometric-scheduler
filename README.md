@@ -13,14 +13,15 @@ This project automates website interaction on Prometric website, checks for avai
 
 ## Download and Install python and required packages
 - download and install python https://www.python.org/downloads/
-- install pip https://pip.pypa.io/en/stable/installation/
-- open cmd or terminal and run:
+- make sure pip is installed https://pip.pypa.io/en/stable/installation/
+- open cmd/terminal inside `prometric-scheduler` folder where `requirements.txt` file is located and run:
+- on Linux/MacOs:
   ```
-  pip3 install selenium webdriver-manager playsound
+  python3 -m pip install -r requirements.txt
   ```
-- if that doesn't work on windows. try:
+- on windows:
   ```
-  py -m pip install selenium webdriver-manager playsound
+  py -m pip install -r requirements.txt
   ```
 
 ## Python Script (`proscheduler.py`)
