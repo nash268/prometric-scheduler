@@ -1,96 +1,124 @@
-# prometric-scheduler
-![Screenshot 2024-04-04 12 35 44 PM](https://github.com/nash268/prometric-scheduler/assets/130772656/ddbcfd49-4a30-40bf-a6c2-42e85279884b)
+# Prometric Scheduler
 
+![Prometric Scheduler Screenshot](https://github.com/nash268/prometric-scheduler/assets/130772656/ddbcfd49-4a30-40bf-a6c2-42e85279884b)
 
-## [Watch Tutorial Video on Youtube](https://youtu.be/3JTJTnPMorY?si=uihAMKIiucfjl9nV)
+**Prometric Scheduler** automates checking the Prometric website for available exam dates and alerts you as soon as seats open up.
 
-## Overview
+📺 [Watch the tutorial video on YouTube](https://youtu.be/3JTJTnPMorY?si=uihAMKIiucfjl9nV)
 
-This project automates website interaction on Prometric website, checks for available dates and alerts the user once seats are found.
 > [!NOTE]
-> It checks for Pakistani centers by default. To add other centers
-> see section "[Adding centers for different country](#adding-centers-for-different-country)"
+> By default, this checks **Pakistani centers only**. To check centers in a different country, see [Adding Centers for a Different Country](#adding-centers-for-a-different-country).
 
-## Download and Install python and required packages
-- download and install python https://www.python.org/downloads/
-- make sure pip is installed https://pip.pypa.io/en/stable/installation/
-- open cmd/terminal inside `prometric-scheduler` folder where `requirements.txt` file is located and run:
-- on Linux/MacOs:
-  ```
-  python3 -m pip install -r requirements.txt
-  ```
-- on windows:
-  ```
-  py -m pip install -r requirements.txt
-  ```
+---
 
-## Python Script (`proscheduler.py`)
-- Download repository
-  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/44a47a1a-abfd-4a37-924a-1098ee968d6b)
-- extract zip file
-- open terminal in the ``prometric-scheduler/`` folder where ``proscheduler.py`` is located
-- inside cmd/terminal run:
+## Table of Contents
 
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [Running the Script](#running-the-script)
+4. [Adding Centers for a Different Country](#adding-centers-for-a-different-country)
+5. [Scheduling](#scheduling)
+6. [Support](#support)
+7. [License](#license)
 
-- on Linux/MacOS:
-  ```
-  python3 proscheduler.py
-  ```
-- on Windows:
-  ```
-  py proscheduler.py
-  ```
-  
-- [running script on linux](https://github.com/nash268/prometric-scheduler/assets/130772656/68b5cdf8-58e7-4f98-80d4-ff1a2284c632)
+---
 
+## Requirements
 
+- [Python](https://www.python.org/downloads/) installed
+- [pip](https://pip.pypa.io/en/stable/installation/) installed
 
+---
 
+## Installation
 
+1. **Download this repository** and extract the ZIP file.
 
-- When running the script for the first time, it will prompt you with a few relevant questions.
-- The provided values are then saved in the `user_input.txt` file.
-- Subsequent runs of the script will automatically load values from the `user_input.txt` file.
+   ![Download repository](https://github.com/nash268/prometric-scheduler/assets/130772656/44a47a1a-abfd-4a37-924a-1098ee968d6b)
+
+2. **Open a terminal** in the `prometric-scheduler` folder — the same folder that contains `requirements.txt`.
+
+3. **Install the required packages:**
+
+   | OS | Command |
+   |---|---|
+   | Linux / macOS | `python3 -m pip install -r requirements.txt` |
+   | Windows | `py -m pip install -r requirements.txt` |
+
+---
+
+## Running the Script
+
+1. Open a terminal in the `prometric-scheduler` folder — the same folder that contains `proscheduler.py`.
+2. Run the script:
+
+   | OS | Command |
+   |---|---|
+   | Linux / macOS | `python3 proscheduler.py` |
+   | Windows | `py proscheduler.py` |
+
+   🎥 [See it running on Linux](https://github.com/nash268/prometric-scheduler/assets/130772656/68b5cdf8-58e7-4f98-80d4-ff1a2284c632)
+
+3. **First run:** you'll be asked a few setup questions. Your answers are saved to `user_input.txt`.
+4. **Later runs:** the script automatically reuses the saved values — no need to answer again.
+
 > [!NOTE]
-> To update the stored values, simply delete the `user_input.txt` file and rerun the script.
-> OR run script with "-e" argument
-> ```
-> python3 proscheduler.py -e
-> ```
+> **To update your saved values**, either:
+> - Delete `user_input.txt` and rerun the script, **or**
+> - Rerun the script with the `-e` flag:
+>   ```
+>   python3 proscheduler.py -e
+>   ```
 
-### Adding centers for different country
-- run script with "-c" argument to add other centers
+---
+
+## Adding Centers for a Different Country
+
+Run the script with the `-c` flag:
+
 ```
 python3 proscheduler.py -c
 ```
-- this will create a `custom_centers.txt` file in same directory, and store centers
 
-[Screen recording 2024-04-06 6.25.01 PM.webm](https://github.com/nash268/prometric-scheduler/assets/130772656/fca7c0f2-a02f-4d2b-bf44-9e6a4cd9934c)
+This creates a `custom_centers.txt` file in the same folder, where your chosen centers are stored.
 
+🎥 [Watch: adding custom centers](https://github.com/nash268/prometric-scheduler/assets/130772656/fca7c0f2-a02f-4d2b-bf44-9e6a4cd9934c)
 
 > [!TIP]
-> Do Not! change any file names in prometric-scheduler folder for scheduling to work properly.
+> Don't rename any files in the `prometric-scheduler` folder — scheduling depends on the original file names.
+
+---
+
+## Scheduling
 
 > [!CAUTION]
-> Script will remove all previous cronjobs on Linux & MacOs.
+> Running this script will remove **all existing cron jobs** on Linux and macOS.
 
-### Linux and MacOs
-- For Linux and MacOS users, the script utilizes crontab for scheduling automatic runs. Visit [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) to configure the timing.
-- once you have found your seats(hooray!!🎉🥳), to remove all cronjobs run `crontab -r` command in terminal.
+### Linux / macOS
+
+- Scheduling is handled automatically via **crontab**.
+- To customize the timing, use [crontab.guru](https://crontab.guru/#*/30_*_*_*_*) as a reference.
+- Once you've found your seats 🎉 — remove the scheduled job by running:
+  ```
+  crontab -r
+  ```
+
 ### Windows
-- on Windows, script utilizes Windows Task Scheduler. after running the script, search task scheduler in start menu and see if the task is created.
-- Delete Task once you have found your dates.
-  ![image](https://github.com/nash268/prometric-scheduler/assets/130772656/ab513513-5a8f-4147-85ca-6f91b42f9fe5)
 
+- Scheduling is handled automatically via **Windows Task Scheduler**.
+- After running the script, open **Task Scheduler** from the Start menu to confirm the task was created.
+- Once you've found your dates, delete the task manually:
 
+  ![Delete Windows scheduled task](https://github.com/nash268/prometric-scheduler/assets/130772656/ab513513-5a8f-4147-85ca-6f91b42f9fe5)
 
+---
 
 ## Support
 
-For any issues or questions, feel free to [create an issue](https://github.com/nash268/prometric-scheduler/issues).
+Having issues or questions? [Open an issue](https://github.com/nash268/prometric-scheduler/issues) on GitHub.
 
-
+---
 
 ## License
 
-This project is licensed under the [GNU General Public License v3.0](LICENSE).
+Licensed under the [GNU General Public License v3.0](LICENSE).
